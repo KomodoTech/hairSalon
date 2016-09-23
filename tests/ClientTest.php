@@ -36,6 +36,41 @@
             $this->assertEquals($expected_output, $result);
         }
 
+        function test_getName()
+        {
+            //ARRANGE
+            $id = 1;
+            $stylist_id = 2;
+            $client_name = "C_Papa Smurf";
+            $new_client = new Client($client_name, $stylist_id, $id);
+            $expected_output = $client_name;
+
+            //ACT
+            $result = $new_client->getName();
+
+            //ASSERT
+            $this->assertEquals($expected_output, $result);
+        }
+
+        function test_setName()
+        {
+            //ARRANGE
+            $id = 1;
+            $stylist_id = 2;
+            $client_name = "C_Papa Smurf";
+            $new_client = new Client($client_name, $stylist_id, $id);
+
+            $new_client_name = "C_Lateness Incarnate";
+            $expected_output = $new_client_name;
+
+            //ACT
+            $new_client->setName($new_client_name);
+            $result = $new_client->getName();
+
+            //ASSERT
+            $this->assertEquals($expected_output, $result);
+        }
+
         function test_save()
         {
             //ARRANGE
@@ -133,8 +168,6 @@
             //ASSERT
             $this->assertEquals($expected_output, $result);
         }
-
-
 
     }
 
