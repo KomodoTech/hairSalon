@@ -25,7 +25,7 @@
             //ARRANGE
             $id = 1;
             $stylist_id = 2;
-            $client_name = "Papa Smurf";
+            $client_name = "C_Papa Smurf";
             $new_client = new Client($client_name, $stylist_id, $id);
             $expected_output = 1;
 
@@ -39,12 +39,12 @@
         function test_save()
         {
             //ARRANGE
-            $stylist_name = "Neymar";
+            $stylist_name = "S_Neymar";
             $new_stylist = new Stylist($stylist_name);
             $new_stylist->save();
             $new_stylist_id = $new_stylist->getId();
 
-            $client_name = "Rasputin Nitupsar";
+            $client_name = "C_Rasputin Nitupsar";
             $new_client = new Client($client_name, $new_stylist_id);
 
             //ACT
@@ -55,6 +55,45 @@
 
             //ASSERT
             $this->assertEquals($expected_output, $result);
+        }
+
+        function test_getAll()
+        {
+            //ARRANGE
+            $stylist_name = "S_Sweeney Todd";
+            $new_stylist = new Stylist($stylist_name);
+            $new_stylist->save();
+            $new_stylist_id = $new_stylist->getId();
+
+            $stylist_name2 = "S_Chernobyl Corn";
+            $new_stylist2 = new Stylist($stylist_name2);
+            $new_stylist2->save();
+            $new_stylist_id2 = $new_stylist2->getId();
+
+            $client_name = "C_Meat Pire";
+            $new_client = new Client($client_name, $new_stylist_id);
+            $new_client->save();
+
+            $client_name2 = "C_Ordinary Lint";
+            $new_client2 = new Client($client_name2, $new_stylist_id);
+            $new_client2->save();
+
+            $client_name3 = "C_Ostrich Lover";
+            $new_client3 = new Client($client_name3, $new_stylist_id2);
+            $new_client3->save();
+
+            $client_name4 = "C_Wardrobe Warfare";
+            $new_client4 = new Client($client_name4, $new_stylist_id2);
+            $new_client4->save();
+
+            $expected_output = [$new_client, $new_client2, $new_client3, $new_client4];
+
+            //ACT
+            $result = Client::getAll();
+
+            //ASSERT
+            $this->assertEquals($expected_output, $result);
+
         }
 
     }
