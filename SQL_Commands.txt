@@ -1,0 +1,9 @@
+CREATE DATABASE hair_salon;
+CREATE DATABASE hair_salon_test;
+USE hair_salon_test;
+CREATE TABLE stylists (id serial PRIMARY KEY, name VARCHAR (255));
+CREATE TABLE clients (id serial PRIMARY KEY, name VARCHAR (255), stylist_id INT);
+USE hair_salon;
+CREATE TABLE stylists (id serial PRIMARY KEY, name VARCHAR (255));
+CREATE TABLE clients (id serial PRIMARY KEY, name VARCHAR (255), sylist_id INT);
+USE hair_salon_test;
