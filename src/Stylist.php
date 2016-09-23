@@ -67,6 +67,57 @@
             }
             return $stylists;
         }
+
+
+
+        static function findById($search_id)
+        {
+            $found_stylist = null;
+            $stylists_in_database = Stylist::getAll();
+
+            for ($stylist_index = 0; $stylist_index < count($stylists_in_database); $stylist_index++)
+            {
+                $current_stylist = $stylists_in_database[$stylist_index];
+                $current_stylist_id = $current_stylist->getId();
+
+                if ($current_stylist_id == $search_id)
+                {
+                    $found_stylist = $current_stylist;
+                }
+            }
+
+            if (!$found_stylist)
+            {
+                print("Could not find stylist with id of " . $search_id . "\n");
+            }
+            return $found_stylist;
+        }
+
+        static function findByName($search_name)
+        {
+            $found_stylists = [];
+
+            $stylists_in_database = Stylist::getAll();
+
+            for ($stylist_index = 0; $stylist_index < count($stylists_in_database); $stylist_index++)
+            {
+                $current_stylist = $stylists_in_database[$stylist_index];
+                $current_stylist_name = $current_stylist->getName();
+
+                if ($current_stylist_name == $search_name)
+                {
+                    $found_stylists[] = $current_stylist;
+                }
+            }
+
+            if (count($found_stylists))
+            {
+                print("Could not find stylist with name of " . $search_name . "\n");
+            }
+            return $found_stylists;
+        }
+
+
     }
 
 

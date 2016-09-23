@@ -119,7 +119,7 @@
                 }
             }
 
-            if (count($found_clients))
+            if (!count($found_clients))
             {
                 print("Could not find client with name of " . $search_name . "\n");
             }

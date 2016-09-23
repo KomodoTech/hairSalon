@@ -224,6 +224,43 @@
             $this->assertEquals($expected_output, $result);
         }
 
+        function test_findByName()
+        {
+            //ARRANGE
+            $stylist_name = "S_Whimsical Warthog";
+            $new_stylist = new Stylist($stylist_name);
+            $new_stylist->save();
+            $new_stylist_id = $new_stylist->getId();
+
+            $stylist_name2 = "S_Spanish Fly";
+            $new_stylist2 = new Stylist($stylist_name2);
+            $new_stylist2->save();
+            $new_stylist_id2 = $new_stylist2->getId();
+
+            $client_name = "C_Unattainable Paralysis";
+            $new_client = new Client($client_name, $new_stylist_id);
+            $new_client->save();
+
+            $client_name2 = "C_Kitchen Hands";
+            $new_client2 = new Client($client_name2, $new_stylist_id);
+            $new_client2->save();
+
+            $client_name3 = "C_Orchid Summer";
+            $new_client3 = new Client($client_name3, $new_stylist_id2);
+            $new_client3->save();
+
+            $client_name4 = "C_Kitchen Hands";
+            $new_client4 = new Client($client_name4, $new_stylist_id2);
+            $new_client4->save();
+
+            $expected_output = [$new_client2, $new_client4];
+
+            //ACT
+            $result = Client::findByName($client_name2);
+
+            //ASSERT
+            $this->assertEquals($expected_output, $result);
+        }
     }
 
 
