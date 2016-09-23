@@ -41,7 +41,7 @@
             //ARRANGE
             $id = 1;
             $stylist_id = 2;
-            $client_name = "C_Papa Smurf";
+            $client_name = "C_Burning Smurf Village";
             $new_client = new Client($client_name, $stylist_id, $id);
             $expected_output = 2;
 
@@ -57,7 +57,7 @@
             //ARRANGE
             $id = 1;
             $stylist_id = 2;
-            $client_name = "C_Papa Smurf";
+            $client_name = "C_Witnessed Cavemen";
             $new_client = new Client($client_name, $stylist_id, $id);
             $expected_output = $client_name;
 
@@ -73,7 +73,7 @@
             //ARRANGE
             $id = 1;
             $stylist_id = 2;
-            $client_name = "C_Papa Smurf";
+            $client_name = "C_Hocus Pocus";
             $new_client = new Client($client_name, $stylist_id, $id);
 
             $new_client_name = "C_Lateness Incarnate";
@@ -180,6 +180,45 @@
             //ACT
             Client::deleteAll();
             $result = Client::getAll();
+
+            //ASSERT
+            $this->assertEquals($expected_output, $result);
+        }
+
+        function test_findById()
+        {
+            //ARRANGE
+            $stylist_name = "S_Whistful Whale";
+            $new_stylist = new Stylist($stylist_name);
+            $new_stylist->save();
+            $new_stylist_id = $new_stylist->getId();
+
+            $stylist_name2 = "S_Hornbeaked Breaker";
+            $new_stylist2 = new Stylist($stylist_name2);
+            $new_stylist2->save();
+            $new_stylist_id2 = $new_stylist2->getId();
+
+            $client_name = "C_Fruitful Fist";
+            $new_client = new Client($client_name, $new_stylist_id);
+            $new_client->save();
+
+            $client_name2 = "C_Spurned Porridge";
+            $new_client2 = new Client($client_name2, $new_stylist_id);
+            $new_client2->save();
+
+            $client_name3 = "C_Journey Steak";
+            $new_client3 = new Client($client_name3, $new_stylist_id2);
+            $new_client3->save();
+
+            $client_name4 = "C_Sloth HitnRun";
+            $new_client4 = new Client($client_name4, $new_stylist_id2);
+            $new_client4->save();
+
+            $new_client_id2 = $new_client2->getId();
+            $expected_output = $new_client2;
+
+            //ACT
+            $result = Client::findById($new_client_id2);
 
             //ASSERT
             $this->assertEquals($expected_output, $result);

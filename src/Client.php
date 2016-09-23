@@ -79,6 +79,53 @@
             return $clients;
         }
 
+        static function findById($search_id)
+        {
+            $found_client = null;
+            $clients_in_database = Client::getAll();
+
+            for ($client_index = 0; $client_index < count($clients_in_database); $client_index++)
+            {
+                $current_client = $clients_in_database[$client_index];
+                $current_client_id = $current_client->getId();
+
+                if ($current_client_id == $search_id)
+                {
+                    $found_client = $current_client;
+                }
+            }
+
+            if (!$found_client)
+            {
+                print("Could not find client with id of " . $search_id . "\n");
+            }
+            return $found_client;
+        }
+
+        static function findByName($search_name)
+        {
+            $found_clients = [];
+
+            $clients_in_database = Client::getAll();
+
+            for ($client_index = 0; $client_index < count($clients_in_database); $client_index++)
+            {
+                $current_client = $clients_in_database[$client_index];
+                $current_client_name = $current_client->getName();
+
+                if ($current_client_name == $search_name)
+                {
+                    $found_clients[] = $current_client;
+                }
+            }
+
+            if (count($found_clients))
+            {
+                print("Could not find client with name of " . $search_name . "\n");
+            }
+            return $found_clients;
+        }
+
 
     }
 
