@@ -93,8 +93,48 @@
 
             //ASSERT
             $this->assertEquals($expected_output, $result);
-
         }
+
+        function test_deleteAll()
+        {
+            //ARRANGE
+            $stylist_name = "S_Dirtface Kale";
+            $new_stylist = new Stylist($stylist_name);
+            $new_stylist->save();
+            $new_stylist_id = $new_stylist->getId();
+
+            $stylist_name2 = "S_Lord Lichtenstein";
+            $new_stylist2 = new Stylist($stylist_name2);
+            $new_stylist2->save();
+            $new_stylist_id2 = $new_stylist2->getId();
+
+            $client_name = "C_Swedish Chefts";
+            $new_client = new Client($client_name, $new_stylist_id);
+            $new_client->save();
+
+            $client_name2 = "C_Moar Lumber";
+            $new_client2 = new Client($client_name2, $new_stylist_id);
+            $new_client2->save();
+
+            $client_name3 = "C_Winter Smells";
+            $new_client3 = new Client($client_name3, $new_stylist_id2);
+            $new_client3->save();
+
+            $client_name4 = "C_Outright Snake";
+            $new_client4 = new Client($client_name4, $new_stylist_id2);
+            $new_client4->save();
+
+            $expected_output = [];
+
+            //ACT
+            Client::deleteAll();
+            $result = Client::getAll();
+
+            //ASSERT
+            $this->assertEquals($expected_output, $result);
+        }
+
+
 
     }
 
