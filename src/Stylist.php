@@ -2,8 +2,8 @@
 
     class Stylist
     {
-        private name;
-        private id;
+        private $name;
+        private $id;
 
         function __construct($name, $id=null)
         {
@@ -65,7 +65,7 @@
                     $stylists[] = $stylist_object;
                 }
             }
-            return $stylists; 
+            return $stylists;
         }
     }
 
