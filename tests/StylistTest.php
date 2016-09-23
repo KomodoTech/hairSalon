@@ -5,6 +5,7 @@
     */
 
     require_once("src/Stylist.php");
+    require_once("src/Client.php");
 
     $server = "mysql:host=localhost:8889;dbname=hair_salon_test";
     $username = "root";
@@ -195,6 +196,44 @@
 
             //ACT
             $result = Stylist::findByName($stylist_name3);
+
+            //ASSERT
+            $this->assertEquals($expected_output, $result);
+        }
+
+        function test_getClients()
+        {
+            //ARRANGE
+            $stylist_name = "S_Whimsical Warthog";
+            $new_stylist = new Stylist($stylist_name);
+            $new_stylist->save();
+            $new_stylist_id = $new_stylist->getId();
+
+            $stylist_name2 = "S_Spanish Fly";
+            $new_stylist2 = new Stylist($stylist_name2);
+            $new_stylist2->save();
+            $new_stylist_id2 = $new_stylist2->getId();
+
+            $client_name = "C_Unattainable Paralysis";
+            $new_client = new Client($client_name, $new_stylist_id);
+            $new_client->save();
+
+            $client_name2 = "C_Kitchen Hands";
+            $new_client2 = new Client($client_name2, $new_stylist_id);
+            $new_client2->save();
+
+            $client_name3 = "C_Orchid Summer";
+            $new_client3 = new Client($client_name3, $new_stylist_id2);
+            $new_client3->save();
+
+            $client_name4 = "C_Farmstand Armstrong";
+            $new_client4 = new Client($client_name4, $new_stylist_id2);
+            $new_client4->save();
+
+            $expected_output = [$new_client, $new_client2];
+
+            //ACT
+            $result = $new_stylist->getClients();
 
             //ASSERT
             $this->assertEquals($expected_output, $result);

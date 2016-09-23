@@ -5,12 +5,14 @@
         private $name;
         private $id;
 
+        /*==CONSTRUCTOR========================================*/
         function __construct($name, $id=null)
         {
             $this->name = $name;
             $this->id = $id;
         }
 
+        /*==GETTERS/SETTERS========================================*/
         function getName()
         {
             return (string) $this->name;
@@ -27,7 +29,7 @@
             return (int) $this->id;
         }
 
-
+        /*==METHODS===============================================*/
         function save()
         {
             $sql_command = "INSERT INTO stylists (name) VALUES ('";
@@ -40,6 +42,36 @@
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
+        function getClients()
+        {
+            $clients_of_stylist = [];
+            $stylist_id = $this->getId();
+
+            $sql_command = "SELECT * FROM clients WHERE stylist_id = " . $stylist_id . ";";
+
+            $clients_PDOStatement = $GLOBALS['DB']->query($sql_command);
+
+            if ($clients_PDOStatement)
+            {
+                $clients_array = $clients_PDOStatement->fetchAll();
+
+                for ($client_index = 0; $client_index < count($clients_array); $client_index++)
+                {
+                    $current_client = $clients_array[$client_index];
+                    $name = $current_client['name'];
+                    $stylist_id = $current_client['stylist_id'];
+                    $id = $current_client['id'];
+
+                    $current_client_object = new Client($name, $stylist_id, $id);
+                    $clients_of_stylist[] = $current_client_object;
+                }
+            }
+            return $clients_of_stylist;
+        }
+
+
+
+        /*==STATIC METHODS==========================================*/
         static function deleteAll()
         {
             $GLOBALS['DB']->exec("DELETE FROM stylists");
@@ -116,9 +148,6 @@
             }
             return $found_stylists;
         }
-
-
-        
 
     }
 
