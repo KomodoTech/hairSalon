@@ -36,6 +36,22 @@
             $this->assertEquals($expected_output, $result);
         }
 
+        function test_getStylistId()
+        {
+            //ARRANGE
+            $id = 1;
+            $stylist_id = 2;
+            $client_name = "C_Papa Smurf";
+            $new_client = new Client($client_name, $stylist_id, $id);
+            $expected_output = 2;
+
+            //ACT
+            $result = $new_client->getStylistId();
+
+            //ASSERT
+            $this->assertEquals($expected_output, $result);
+        }
+
         function test_getName()
         {
             //ARRANGE
