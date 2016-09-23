@@ -84,6 +84,26 @@
             $this->assertEquals($expected_output, $result);
         }
 
+        function test_update()
+        {
+            //ARRANGE
+            $stylist_name = "S_Neymar";
+            $new_stylist = new Stylist($stylist_name);
+            $new_stylist->save();
+
+            $new_stylist_name = "S_Talented Tortoise";
+
+            //ACT
+            $new_stylist->update($new_stylist_name);
+            $expected_output = $new_stylist;
+
+            $all_stylists = Stylist::getAll();
+            $result = $all_stylists[0];
+
+            //ASSERT
+            $this->assertEquals($expected_output, $result);
+        }
+
         function test_getAll()
         {
             //ARRANGE
