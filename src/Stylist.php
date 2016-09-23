@@ -51,7 +51,7 @@
 
             $stylists_PDOStatement = $GLOBALS['DB']->query("SELECT * FROM stylists;");
 
-            if ($stylist_PDOStatement)
+            if ($stylists_PDOStatement)
             {
                 $stylists_data = $stylists_PDOStatement->fetchAll();
 
@@ -110,13 +110,15 @@
                 }
             }
 
-            if (count($found_stylists))
+            if (!count($found_stylists))
             {
                 print("Could not find stylist with name of " . $search_name . "\n");
             }
             return $found_stylists;
         }
 
+
+        
 
     }
 
