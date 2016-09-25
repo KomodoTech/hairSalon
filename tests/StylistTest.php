@@ -84,6 +84,23 @@
             $this->assertEquals($expected_output, $result);
         }
 
+        function test_delete()
+        {
+            //ARRANGE
+            $stylist_name = "S_El Capitan";
+            $new_stylist = new Stylist($stylist_name);
+            $new_stylist->save();
+            $expected_output = null;
+
+            //ACT
+            $new_stylist->delete();
+            $all_stylists = Stylist::getAll();
+            $result = $all_stylists[0];
+
+            //ASSERT
+            $this->assertEquals($expected_output, $result);
+        }
+
         function test_update()
         {
             //ARRANGE

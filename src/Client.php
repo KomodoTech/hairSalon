@@ -6,6 +6,7 @@
         private $stylist_id;
         private $id;
 
+        /*==CONSTRUCTOR========================================*/
         function __construct($name, $stylist_id=null, $id=null)
         {
             $this->name = $name;
@@ -13,6 +14,7 @@
             $this->id = $id;
         }
 
+        /*==GETTERS/SETTERS========================================*/
         function getName()
         {
             return (string) $this->name;
@@ -30,12 +32,19 @@
             return (int) $this->stylist_id;
         }
 
+        function setStylistId($new_stylist_object)
+        {
+            $new_stylist_id = $new_stylist_object->getId();
+            $this->stylist_id = (int) $new_stylist_id;
+        }
+
         function getId()
         {
             return (int) $this->id;
         }
 
 
+        /*==METHODS===============================================*/
         function save()
         {
             $sql_command = "INSERT INTO clients (name, stylist_id) VALUES('";
@@ -49,6 +58,34 @@
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
+        function delete()
+        {
+            $id = $this->getId();
+            $sql_command = "DELETE FROM clients WHERE id = " . $id . ";";
+            $GLOBALS['DB']->exec($sql_command);
+        }
+
+        function updateName($new_name)
+        {
+            $id = $this->getId();
+            $sql_command = "UPDATE clients SET name = '" . $new_name . "' WHERE id = " . $id . ";";
+            $GLOBALS['DB']->exec($sql_command);
+
+            $this->setName($new_name);
+        }
+
+        function updateStylistId($new_stylist_object)
+        {
+            $id = $this->getId();
+            $new_sylist_id = $new_stylist_object->getId();
+
+            $sql_command = "UPDATE clients SET stylist_id = '" . $new_stylist_id . "' WHERE id = " . $id . ";";
+            $GLOBALS['DB']->exec($sql_command);
+
+            $this->setStylistId($new_stylist_object);
+        }
+
+        /*==STATIC METHODS==========================================*/
         static function deleteAll()
         {
             $GLOBALS['DB']->exec("DELETE FROM clients");

@@ -87,6 +87,27 @@
             $this->assertEquals($expected_output, $result);
         }
 
+        function test_setStylistId()
+        {
+            //ARRANGE
+            $id = 1;
+            $stylist_id = 2;
+            $client_name = "C_Molten Cheese";
+            $new_client = new Client($client_name, $stylist_id, $id);
+
+            $new_stylist_id = 3;
+            $new_stylist_name = "S_Offal Pizza";
+            $new_stylist = new Stylist($new_stylist_name, $new_stylist_id);
+            $expected_output = $new_stylist->getId();
+
+            //ACT
+            $new_client->setStylistId($new_stylist);
+            $result = $new_client->getStylistId();
+
+            //ASSERT
+            $this->assertEquals($expected_output, $result);
+        }
+
         function test_save()
         {
             //ARRANGE
@@ -103,6 +124,31 @@
             $expected_output = $new_client;
             $all_clients = Client::getAll();
             $result = $all_clients[0];
+
+            //ASSERT
+            $this->assertEquals($expected_output, $result);
+        }
+
+        function test_updateStylistId()
+        {
+            //ARRANGE
+            $stylist_name = "S_Known Unknown";
+            $new_stylist = new Stylist($stylist_name);
+            $new_stylist->save();
+            $new_stylist_id = $new_stylist->getId();
+
+            $client_name = "C_Block Parsnip";
+            $new_client = new Client($client_name, $new_stylist_id);
+            $new_client->save();
+
+            $stylist_name2 = "S_Confused Cowbell";
+            $new_stylist2 = new Stylist($stylist_name2);
+            $new_stylist2->save();
+            $expected_output = $new_stylist2->getId();
+
+            //ACT
+            $new_client->setStylistId($new_stylist2);
+            $result = $new_client->getStylistId();
 
             //ASSERT
             $this->assertEquals($expected_output, $result);

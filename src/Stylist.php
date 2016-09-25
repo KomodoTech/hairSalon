@@ -78,6 +78,13 @@
             $this->setName($new_name);
         }
 
+        function delete()
+        {
+            $id = $this->getId();
+            $sql_command = "DELETE FROM stylists WHERE id = " . $id . ";";
+            $GLOBALS['DB']->exec($sql_command);
+        }
+
 
         /*==STATIC METHODS==========================================*/
         static function deleteAll()
