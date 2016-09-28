@@ -5,10 +5,13 @@ $(document).ready(function() {
         var stylistId = parseInt($(this).attr("value"));
         var stylistName = $(this).attr("id");
         //put the value into the hidden input
-
         $("input[name=stylist_id]").val(stylistId);
         //display the value as the dropdown button text
         $("#stylist-dropdown .dropdown-button-text p").text(stylistName);
-    })
+    });
+
+    $("#delete-all").click(function(){
+        $("input[name='delete_all']").val(1);
+    });
 
 });

@@ -42,30 +42,42 @@
     $app->post("/", function() use($app)
     {
         $home_name = "Chez Proot";
+
         $new_stylist_name = $_POST["new_stylist"];
         $new_client_name = $_POST["new_client"];
         $new_client_stylist_id = (int) $_POST["stylist_id"];
 
-        if ($new_stylist_name)
+        $delete_all = (int) $_POST["delete_all"];
+
+        if ($delete_all)
         {
-            $new_stylist = new Stylist($new_stylist_name);
-            $new_stylist->save();
+            Client::deleteAll();
+            Stylist::deleteAll();
+            $_POST["delete_all"] = 0;
         }
-
-        $all_stylists = Stylist::getAll();
-
-        if ($new_client_name && $new_client_stylist_id)
+        else
         {
-            $new_client = new Client($new_client_name, $new_client_stylist_id);
-            $new_client->save();
-            /*
-                RESET stylist_id in $_POST SO that submitting new client without
-                choosing a stylist does not save a new client to the database
-            */
-            $_POST["stylist_id"] = 0;
-        }
+            if ($new_stylist_name)
+            {
+                $new_stylist = new Stylist($new_stylist_name);
+                $new_stylist->save();
+            }
 
-        $all_clients = Client::getAll();
+            $all_stylists = Stylist::getAll();
+
+            if ($new_client_name && $new_client_stylist_id)
+            {
+                $new_client = new Client($new_client_name, $new_client_stylist_id);
+                $new_client->save();
+                /*
+                    RESET stylist_id in $_POST SO that submitting new client without
+                    choosing a stylist does not save a new client to the database
+                */
+                $_POST["stylist_id"] = 0;
+            }
+
+            $all_clients = Client::getAll();
+        }
 
         return $app["twig"]->render("home.html.twig",
             array(

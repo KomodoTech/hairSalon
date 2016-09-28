@@ -15,10 +15,15 @@
                     {% if all_stylists %}
                         {% include "partials/add_new_client.html.twig" %}
                     {% endif %}
+
+                    {% if all_stylists or all_clients %}
+                        {% include "partials/delete_all_button.html.twig" %}
+                    {% endif %}
                 </div>
                 <div class="col-sm-6">
                     {% include "partials/db_contents.html.twig" %}
                 </div>
+
         </div>
     </body>
 </html>
