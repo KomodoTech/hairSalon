@@ -58,6 +58,11 @@
         {
             $new_client = new Client($new_client_name, $new_client_stylist_id);
             $new_client->save();
+            /*
+                RESET stylist_id in $_POST SO that submitting new client without
+                choosing a stylist does not save a new client to the database
+            */
+            $_POST["stylist_id"] = 0;
         }
 
         $all_clients = Client::getAll();
