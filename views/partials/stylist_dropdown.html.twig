@@ -1,12 +1,14 @@
 <div class="dropdown">
     <button class="btn btn-default dropdown-toggle" type="button" id="stylist-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-        Choose Stylist
+        <div class="dropdown-button-text">
+            <p>Choose Stylist</p>
+        </div>
         <span class="caret"></span>
     </button>
     <ul class="dropdown-menu stylist-dropdown-list" aria-labelledby="stylist-dropdown" name="stylist_id">
         <li role="separator" class="divider"></li>
         {% for stylist in all_stylists %}
-            <li value="{{ stylist.getId }}">{{ stylist.getName }}</li>
+            <li id="{{ stylist.getName }}" value="{{ stylist.getId }}">{{ stylist.getName }}</li>
         {% endfor %}
     </ul>
     <!--NOTE:
