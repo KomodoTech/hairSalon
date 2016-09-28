@@ -9,9 +9,9 @@
         /*==CONSTRUCTOR========================================*/
         function __construct($name, $stylist_id=null, $id=null)
         {
-            $this->name = $name;
-            $this->stylist_id = $stylist_id;
-            $this->id = $id;
+            $this->name = (string) $name;
+            $this->stylist_id = (int) $stylist_id;
+            $this->id = (int) $id;
         }
 
         /*==GETTERS/SETTERS========================================*/
@@ -32,9 +32,8 @@
             return (int) $this->stylist_id;
         }
 
-        function setStylistId($new_stylist_object)
+        function setStylistId($new_stylist_id)
         {
-            $new_stylist_id = $new_stylist_object->getId();
             $this->stylist_id = (int) $new_stylist_id;
         }
 
@@ -55,7 +54,7 @@
 
             $GLOBALS['DB']->exec($sql_command);
 
-            $this->id = (int) $GLOBALS['DB']->lastInsertId();    
+            $this->id = (int) $GLOBALS['DB']->lastInsertId();
         }
 
         function delete()
@@ -75,15 +74,14 @@
         }
 
         /*TODO: get Diane's feedback on this method vis a vis setting stylist_id by passing stylist's id vs whole stylist object */
-        function updateStylistId($new_stylist_object)
+        function updateStylistId($new_stylist_id)
         {
             $id = $this->getId();
-            $new_sylist_id = $new_stylist_object->getId();
 
             $sql_command = "UPDATE clients SET stylist_id = '" . $new_stylist_id . "' WHERE id = " . $id . ";";
             $GLOBALS['DB']->exec($sql_command);
 
-            $this->setStylistId($new_stylist_object);
+            $this->setStylistId($new_stylist_id);
         }
 
         /*==STATIC METHODS==========================================*/

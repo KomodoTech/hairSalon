@@ -101,7 +101,7 @@
             $expected_output = $new_stylist->getId();
 
             //ACT
-            $new_client->setStylistId($new_stylist);
+            $new_client->setStylistId($new_stylist_id);
             $result = $new_client->getStylistId();
 
             //ASSERT
@@ -144,10 +144,11 @@
             $stylist_name2 = "S_Confused Cowbell";
             $new_stylist2 = new Stylist($stylist_name2);
             $new_stylist2->save();
-            $expected_output = $new_stylist2->getId();
+            $new_stylist2_id = $new_stylist2->getId();
+            $expected_output = $new_stylist2_id;
 
             //ACT
-            $new_client->setStylistId($new_stylist2);
+            $new_client->updateStylistId($new_stylist2_id);
             $result = $new_client->getStylistId();
 
             //ASSERT
