@@ -8,8 +8,17 @@
             <div class="page-header">
                 <h1>{{ home_name }}</h1>
             </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    {% include "partials/add_new_stylist.html.twig" %}
 
-            {% include "partials/add_new_client.html.twig" %}
+                    {% if all_stylists %}
+                        {% include "partials/add_new_client.html.twig" %}
+                    {% endif %}
+                </div>
+                <div class="col-sm-6">
+                    {% include "partials/db_contents.html.twig" %}
+                </div>
         </div>
     </body>
 </html>

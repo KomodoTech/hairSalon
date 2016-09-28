@@ -1,0 +1,20 @@
+<div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" id="stylist-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Choose Stylist
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu stylist-dropdown-list" aria-labelledby="stylist-dropdown" name="stylist_id">
+        <li role="separator" class="divider"></li>
+        {% for stylist in all_stylists %}
+            <li value="{{ stylist.getId }}">{{ stylist.getName }}</li>
+        {% endfor %}
+    </ul>
+    <!--NOTE:
+            This will not submit so we will write some javascript to extract and
+            sanitize (make value int) the selected stylist info. We will put this
+            info into a hidden input field which will get submitted when the user
+            presses the submit button
+    -->
+    <!--NOTE: create hidden input to give jquery access to the dropdown choice-->
+    <input type="hidden" name="stylist_id">
+</div>
