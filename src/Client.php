@@ -47,7 +47,7 @@
         /*==METHODS===============================================*/
         function save()
         {
-            $sql_command = "INSERT INTO clients (name, stylist_id) VALUES('";
+            $sql_command = "INSERT INTO clients (name, stylist_id) VALUES ('";
             $name = $this->getName();
             $stylist_id = $this->getStylistId();
 
@@ -55,7 +55,7 @@
 
             $GLOBALS['DB']->exec($sql_command);
 
-            $this->id = $GLOBALS['DB']->lastInsertId();
+            $this->id = (int) $GLOBALS['DB']->lastInsertId();    
         }
 
         function delete()

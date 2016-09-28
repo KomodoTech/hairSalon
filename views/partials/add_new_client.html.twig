@@ -1,8 +1,14 @@
 <form action="/" method="post">
     <div id="add-client-form" class="form-group">
         <label for="add-client">Add a client:</label>
-        <input id="add-client" class="form-control" name="new_client" type="text" placeholder="client name">
-        {% include "partials/stylist_dropdown.html.twig" %}
+        <div class="row">
+            <div class="col-sm-8">
+                <input id="add-client" class="form-control" name="new_client" type="text" placeholder="client name">
+            </div>
+            <div class="col-sm-4">
+                {% include "partials/stylist_dropdown.html.twig" %}
+            </div>
+        </div>
         <button class="btn btn-success btn-block form-submit" type="submit">Create Client</button>
     </div>
 </form>

@@ -21,11 +21,12 @@
 
     //TODO: Ask diane about twig namespace, modifying the loader etc.
 
-    $home_name = "Chez Proot";
+
 
     /*=ROUTES=================================================================*/
     $app->get("/", function() use($app)
     {
+        $home_name = "Chez Proot";
         $all_clients = Client::getAll();
         $all_stylists = Stylist::getAll();
 
@@ -40,9 +41,10 @@
 
     $app->post("/", function() use($app)
     {
+        $home_name = "Chez Proot";
         $new_stylist_name = $_POST["new_stylist"];
         $new_client_name = $_POST["new_client"];
-        $new_client_stylist_id = $_POST["stylist_id"];
+        $new_client_stylist_id = (int) $_POST["stylist_id"];
 
         if ($new_stylist_name)
         {

@@ -39,7 +39,7 @@
 
             $GLOBALS['DB']->exec($sql_command);
 
-            $this->id = $GLOBALS['DB']->lastInsertId();
+            $this->id = (int) $GLOBALS['DB']->lastInsertId();
         }
 
         function getClients()
