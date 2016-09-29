@@ -88,5 +88,27 @@
         );
     });
 
+    $app->get("/client/{client_id}", function($client_id) use($app) {
+        $client = Client::findById($client_id);
+        $client_stylist = Stylist::findById($client->getStylistId());
+        return $app["twig"]->render("home.html.twig",
+            array(
+                "client" => $client,
+                "client_stylist" => $client_stylist,
+                "show_details" => 1
+            )
+        );
+    });
+
+    $app->get("/stylist/{stylist_id}", function($stylist_id) use($app) {
+        $stylist = Stylist::findById($stylist_id);
+        return $app["twig"]->render("home.html.twig",
+            array(
+                "stylist" => $stylist,
+                "show_details" => 1
+            )
+        );
+    });
+
     return $app;
  ?>

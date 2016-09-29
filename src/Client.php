@@ -73,7 +73,7 @@
             $this->setName($new_name);
         }
 
-        /*TODO: get Diane's feedback on this method vis a vis setting stylist_id by passing stylist's id vs whole stylist object */
+        
         function updateStylistId($new_stylist_id)
         {
             $id = $this->getId();

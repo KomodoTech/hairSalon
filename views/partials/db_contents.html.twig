@@ -4,7 +4,7 @@
             <h4>Clients</h4>
             <ul>
                 {% for client in all_clients %}
-                    <li><a href="client/{{ client.getId }}">{{ client.getName }}</a></li>
+                    <li><a href="/client/{{ client.getId }}">{{ client.getName }}</a></li>
                 {% endfor %}
             </ul>
         </div>
@@ -12,7 +12,7 @@
             <h4>Stylists</h4>
             <ul>
                 {% for stylist in all_stylists %}
-                    <li><a href="stylist/{{ stylist.getId }}">{{ stylist.getName }}</a></li>
+                    <li><a href="/stylist/{{ stylist.getId }}">{{ stylist.getName }}</a></li>
                 {% endfor %}
             </ul>
         </div>
