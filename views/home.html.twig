@@ -24,14 +24,16 @@
                     {% include "partials/db_contents.html.twig" %}
                 </div>
 
-                {# OVERLAY DETAILS ON TOP OF CURRENT PAGE #}
-                {% if show_details %}
-                    {% if stylist %}
-                        {% include "partials/stylist_details.html.twig" %}
-                    {% elseif client %}
-                        {% include "partials/client_details.html.twig" %}
-                    {% endif %}
-                {% endif %}
         </div>
+
+        {# OVERLAY DETAILS ON TOP OF CURRENT PAGE #}
+        {% if show_details %}
+            {% if stylist %}
+                {% include "partials/stylist_details.html.twig" %}
+            {% elseif client %}
+                {% include "partials/client_details.html.twig" %}
+            {% endif %}
+        {% endif %}
+
     </body>
 </html>

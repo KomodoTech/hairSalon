@@ -89,10 +89,17 @@
     });
 
     $app->get("/client/{client_id}", function($client_id) use($app) {
+        $home_name = "Chez Proot";
+        $all_clients = Client::getAll();
+        $all_stylists = Stylist::getAll();
+
         $client = Client::findById($client_id);
         $client_stylist = Stylist::findById($client->getStylistId());
         return $app["twig"]->render("home.html.twig",
             array(
+                "all_clients" => $all_clients,
+                "all_stylists" => $all_stylists,
+                "home_name" => $home_name,
                 "client" => $client,
                 "client_stylist" => $client_stylist,
                 "show_details" => 1
@@ -101,9 +108,16 @@
     });
 
     $app->get("/stylist/{stylist_id}", function($stylist_id) use($app) {
+        $home_name = "Chez Proot";
+        $all_clients = Client::getAll();
+        $all_stylists = Stylist::getAll();
+
         $stylist = Stylist::findById($stylist_id);
         return $app["twig"]->render("home.html.twig",
             array(
+                "all_clients" => $all_clients,
+                "all_stylists" => $all_stylists,
+                "home_name" => $home_name,
                 "stylist" => $stylist,
                 "show_details" => 1
             )
