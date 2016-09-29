@@ -8,32 +8,33 @@
             <div class="page-header">
                 <h1>{{ home_name }}</h1>
             </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    {% include "partials/add_new_stylist.html.twig" %}
+            <div id="main-content">
+                <div class="row">
+                    <div class="col-sm-6">
+                        {% include "partials/add_new_stylist.html.twig" %}
 
-                    {% if all_stylists %}
-                        {% include "partials/add_new_client.html.twig" %}
-                    {% endif %}
+                        {% if all_stylists %}
+                            {% include "partials/add_new_client.html.twig" %}
+                        {% endif %}
 
-                    {% if all_stylists or all_clients %}
-                        {% include "partials/delete_all_button.html.twig" %}
-                    {% endif %}
-                </div>
-                <div class="col-sm-6">
-                    {% include "partials/db_contents.html.twig" %}
-                </div>
+                        {% if all_stylists or all_clients %}
+                            {% include "partials/delete_all_button.html.twig" %}
+                        {% endif %}
+                    </div>
+                    <div class="col-sm-6">
+                        {% include "partials/db_contents.html.twig" %}
+                    </div>
 
-        </div>
+            </div>
 
-        {# OVERLAY DETAILS ON TOP OF CURRENT PAGE #}
-        {% if show_details %}
-            {% if stylist %}
-                {% include "partials/stylist_details.html.twig" %}
-            {% elseif client %}
-                {% include "partials/client_details.html.twig" %}
+            {# OVERLAY DETAILS ON TOP OF CURRENT PAGE #}
+            {% if show_details %}
+                {% if stylist %}
+                    {% include "partials/stylist_details.html.twig" %}
+                {% elseif client %}
+                    {% include "partials/client_details.html.twig" %}
+                {% endif %}
             {% endif %}
-        {% endif %}
-
+        </div>
     </body>
 </html>

@@ -3,6 +3,9 @@
         <h2 class="panel-title">{{ client.getName }}</h2>
     </div>
     <div class="panel-body">
-        <a href="/stylist/{{ client.getStylistId }}"><h3>Stylist: {{ client_stylist.getName }}</h3></a>
+        <h3>Stylist:</h3>
+        <ul>
+            <li><a href="/stylist/{{ client.getStylistId }}"><h3>{{ client_stylist.getName }}</h3></a></li>
+        </ul>
     </div>
 </div>
