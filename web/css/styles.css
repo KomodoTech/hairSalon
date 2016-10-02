@@ -136,6 +136,11 @@ body
 /*===MEDIA QUERIES===========================================================*/
 @media (min-width: 768px)
 {
+    #stylist-dropdown-div
+    {
+        padding-left: 0;
+    }
+    
     .navbar-header
     {
         float: none;
@@ -145,6 +150,11 @@ body
     {
         margin-right: 30px;
         font-size: 2em;
+    }
+
+    #all-stylists-display , #all-clients-display
+    {
+        font-size: 1.5em;
     }
 }
 
