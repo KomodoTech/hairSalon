@@ -8,6 +8,16 @@
     position: relative;
 }
 
+.panel-title
+{
+    float: left;
+}
+
+.close-details
+{
+    margin-left: 99%;
+}
+
 #client-details , #stylist-details
 {
     position: absolute;
