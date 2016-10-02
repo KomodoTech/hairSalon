@@ -1,17 +1,47 @@
-/*===NAVBAR STYLING============================================*/
+#main-content
+{
+    position: relative;
+}
+
+/*===NAVBAR AND HEADER STYLING============================================*/
 .page-header
 {
     margin-top: 100px;
+    text-align: center;
+    background-color: transparent;
+
+    -webkit-text-stroke: 1px black;
+    color: #f5d5d5;
+    text-shadow:
+    2px 2px 0 #000,
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+.page-header h1
+{
+    padding-top: 20px;
 }
 
 .nav-bar
 {
     height: 75px;
+    background-image: url("/img/hair_blowing.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .navbar-header
 {
     text-align: center;
+}
+
+.navbar-inverse .navbar-brand
+{
+    font-size: 1.5em;
+    color: #f5d5d5;
 }
 
 #home-glyph-button
@@ -26,15 +56,24 @@
     margin-left: 30px;
 }
 
-
-
-
-
-#main-content
+/*===CHOOSE STYLIST DROPDOWN=====================================*/
+.dropdown-button-text
 {
-    position: relative;
+    float: left;
+    margin-right: 10px;
 }
 
+.dropdown-button-text p
+{
+    margin-bottom: 0;
+}
+
+.caret
+{
+    float: right;
+    margin-left: 10px;
+    margin-top: 5px;
+}
 
 /*===OBJECT DETAILS STYLING======================================*/
 
