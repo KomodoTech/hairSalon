@@ -108,6 +108,30 @@ body
     margin-top: 5px;
 }
 
+/*===SEARCH BAR==================================================*/
+#search-bar
+{
+    float: right;
+}
+
+
+#search-button-div
+{
+    float: right;
+    padding-left: 0;
+}
+
+#search-button
+{
+    height: 34px;
+}
+
+#search-form
+{
+    float: left;
+    padding: 0;
+}
+
 /*===OBJECT DETAILS STYLING======================================*/
 
 #client-details , #stylist-details
@@ -140,7 +164,7 @@ body
     {
         padding-left: 0;
     }
-    
+
     .navbar-header
     {
         float: none;
