@@ -7,7 +7,7 @@
         <div id="all-clients-display" class="col-sm-6">
             <h4>Clients</h4>
             <ul>
-                {% for client in all_clients %}
+                {% for client in display_clients %}
                     <li><a href="/client/{{ client.getId }}">{{ client.getName }}</a></li>
                 {% endfor %}
             </ul>
@@ -15,7 +15,7 @@
         <div id="all-stylists-display" class="col-sm-6">
             <h4>Stylists</h4>
             <ul>
-                {% for stylist in all_stylists %}
+                {% for stylist in display_stylists %}
                     <li><a href="/stylist/{{ stylist.getId }}">{{ stylist.getName }}</a></li>
                 {% endfor %}
             </ul>

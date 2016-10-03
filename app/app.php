@@ -27,13 +27,14 @@
     $app->get("/", function() use($app)
     {
         $home_name = "Chez Proot";
-        $all_clients = Client::getAll();
-        $all_stylists = Stylist::getAll();
+        $display_clients = Client::getAll();
+        $display_stylists = Stylist::getAll();
 
         return $app["twig"]->render("home.html.twig",
             array(
-                "all_clients" => $all_clients,
-                "all_stylists" => $all_stylists,
+                "display_clients" => $display_clients,
+                "display_stylists" => $display_stylists,
+                "all_stylists" => $display_stylists,
                 "home_name" => $home_name
             )
         );
@@ -51,8 +52,8 @@
                 Client::deleteAll();
                 Stylist::deleteAll();
 
-                $all_stylists = Stylist::getAll();
-                $all_clients = Client::getAll();
+                $display_stylists = Stylist::getAll();
+                $display_clients = Client::getAll();
 
                 $_POST["delete_all"] = 0;
             }
@@ -70,7 +71,7 @@
                 }
             }
 
-            $all_stylists = Stylist::getAll();
+            $display_stylists = Stylist::getAll();
 
             if (isset($_POST["new_client"]) && isset($_POST["stylist_id"]))
             {
@@ -89,13 +90,14 @@
                 }
             }
 
-            $all_clients = Client::getAll();
+            $display_clients = Client::getAll();
         }
 
         return $app["twig"]->render("home.html.twig",
             array(
-                "all_clients" => $all_clients,
-                "all_stylists" => $all_stylists,
+                "display_clients" => $display_clients,
+                "display_stylists" => $display_stylists,
+                "all_stylists" => $display_stylists,
                 "home_name" => $home_name
             )
         );
@@ -103,15 +105,16 @@
 
     $app->get("/client/{client_id}", function($client_id) use($app) {
         $home_name = "Chez Proot";
-        $all_clients = Client::getAll();
-        $all_stylists = Stylist::getAll();
+        $display_clients = Client::getAll();
+        $display_stylists = Stylist::getAll();
 
         $client = Client::findById($client_id);
         $client_stylist = Stylist::findById($client->getStylistId());
         return $app["twig"]->render("home.html.twig",
             array(
-                "all_clients" => $all_clients,
-                "all_stylists" => $all_stylists,
+                "display_clients" => $display_clients,
+                "display_stylists" => $display_stylists,
+                "all_stylists" => $display_stylists,
                 "home_name" => $home_name,
                 "client" => $client,
                 "client_stylist" => $client_stylist,
@@ -122,17 +125,56 @@
 
     $app->get("/stylist/{stylist_id}", function($stylist_id) use($app) {
         $home_name = "Chez Proot";
-        $all_clients = Client::getAll();
-        $all_stylists = Stylist::getAll();
+        $display_clients = Client::getAll();
+        $display_stylists = Stylist::getAll();
 
         $stylist = Stylist::findById($stylist_id);
         return $app["twig"]->render("home.html.twig",
             array(
-                "all_clients" => $all_clients,
-                "all_stylists" => $all_stylists,
+                "display_clients" => $display_clients,
+                "display_stylists" => $display_stylists,
+                "all_stylists" => $display_stylists,
                 "home_name" => $home_name,
                 "stylist" => $stylist,
                 "show_details" => 1
+            )
+        );
+    });
+
+    $app->get("/search_results" , function() use($app) {
+        $home_name = "Chez Proot";
+
+        /*
+        NOTE: this route should only be reached when $_GET["search_term"] exists
+        */
+        $search_term = $_GET["search_term"];
+        $all_stylists = Stylist::getAll();
+
+        //EMPTY SEARCH TERM
+        if (!$search_term)
+        {
+            $found_clients = Client::getAll();
+            $found_stylists = Stylist::getAll();
+        }
+        //SEARCHING BY ID
+        else if (is_numeric($search_term))
+        {
+            $found_clients = array(Client::findById($search_term));
+            $found_stylists = array(Stylist::findById($search_term));
+        }
+        //SEARCHING BY NAME
+        else
+        {
+            $found_clients = Client::findByName($search_term);
+            $found_stylists = Stylist::findByName($search_term);
+        }
+
+        return $app["twig"]->render("home.html.twig",
+            array(
+                "home_name" => $home_name,
+                "display_clients" => $found_clients,
+                "display_stylists" => $found_stylists,
+                "all_stylists" => $all_stylists
             )
         );
     });

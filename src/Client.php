@@ -73,7 +73,7 @@
             $this->setName($new_name);
         }
 
-        
+
         function updateStylistId($new_stylist_id)
         {
             $id = $this->getId();
@@ -117,6 +117,8 @@
 
         static function findById($search_id)
         {
+            $search_id = (int) $search_id;
+
             $found_client = null;
             $clients_in_database = Client::getAll();
 
@@ -133,7 +135,7 @@
 
             if (!$found_client)
             {
-                print("Could not find client with id of " . $search_id . "\n");
+                // print("Could not find client with id of " . $search_id . "\n");
             }
             return $found_client;
         }

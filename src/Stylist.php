@@ -119,6 +119,8 @@
 
         static function findById($search_id)
         {
+            $search_id = (int) $search_id;
+
             $found_stylist = null;
             $stylists_in_database = Stylist::getAll();
 
@@ -135,7 +137,7 @@
 
             if (!$found_stylist)
             {
-                print("Could not find stylist with id of " . $search_id . "\n");
+                // print("Could not find stylist with id of " . $search_id . "\n");
             }
             return $found_stylist;
         }
