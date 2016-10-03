@@ -43,37 +43,50 @@
     {
         $home_name = "Chez Proot";
 
-        $new_stylist_name = $_POST["new_stylist"];
-        $new_client_name = $_POST["new_client"];
-        $new_client_stylist_id = (int) $_POST["stylist_id"];
-
-        $delete_all = (int) $_POST["delete_all"];
-
-        if ($delete_all)
+        if (isset($_POST["delete_all"]))
         {
-            Client::deleteAll();
-            Stylist::deleteAll();
-            $_POST["delete_all"] = 0;
+            $delete_all = (int) $_POST["delete_all"];
+            if ($delete_all)
+            {
+                Client::deleteAll();
+                Stylist::deleteAll();
+
+                $all_stylists = Stylist::getAll();
+                $all_clients = Client::getAll();
+
+                $_POST["delete_all"] = 0;
+            }
         }
         else
         {
-            if ($new_stylist_name)
+            if (isset($_POST["new_stylist"]))
             {
-                $new_stylist = new Stylist($new_stylist_name);
-                $new_stylist->save();
+                $new_stylist_name = $_POST["new_stylist"];
+
+                if ($new_stylist_name)
+                {
+                    $new_stylist = new Stylist($new_stylist_name);
+                    $new_stylist->save();
+                }
             }
 
             $all_stylists = Stylist::getAll();
 
-            if ($new_client_name && $new_client_stylist_id)
+            if (isset($_POST["new_client"]) && isset($_POST["stylist_id"]))
             {
-                $new_client = new Client($new_client_name, $new_client_stylist_id);
-                $new_client->save();
-                /*
-                    RESET stylist_id in $_POST SO that submitting new client without
-                    choosing a stylist does not save a new client to the database
-                */
-                $_POST["stylist_id"] = 0;
+                $new_client_name = $_POST["new_client"];
+                $new_client_stylist_id = (int) $_POST["stylist_id"];
+
+                if ($new_client_name && $new_stylist_id)
+                {
+                    $new_client = new Client($new_client_name, $new_client_stylist_id);
+                    $new_client->save();
+                    /*
+                        RESET stylist_id in $_POST SO that submitting new client without
+                        choosing a stylist does not save a new client to the database
+                    */
+                    $_POST["stylist_id"] = 0;
+                }
             }
 
             $all_clients = Client::getAll();
