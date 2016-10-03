@@ -77,7 +77,7 @@
                 $new_client_name = $_POST["new_client"];
                 $new_client_stylist_id = (int) $_POST["stylist_id"];
 
-                if ($new_client_name && $new_stylist_id)
+                if ($new_client_name && $new_client_stylist_id)
                 {
                     $new_client = new Client($new_client_name, $new_client_stylist_id);
                     $new_client->save();
