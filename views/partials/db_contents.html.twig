@@ -7,17 +7,25 @@
         <div id="all-clients-display" class="col-sm-6">
             <h4>Clients</h4>
             <ul>
-                {% for client in display_clients %}
-                    <li><a href="/client/{{ client.getId }}">{{ client.getName }}</a></li>
-                {% endfor %}
+                {% if display_clients[0] %}
+                    {% for client in display_clients %}
+                        <li><a href="/client/{{ client.getId }}">{{ client.getName }}</a></li>
+                    {% endfor %}
+                {% else %}
+                    <h5>No Clients Found</h5>
+                {% endif %}
             </ul>
         </div>
         <div id="all-stylists-display" class="col-sm-6">
             <h4>Stylists</h4>
             <ul>
-                {% for stylist in display_stylists %}
-                    <li><a href="/stylist/{{ stylist.getId }}">{{ stylist.getName }}</a></li>
-                {% endfor %}
+                {% if display_stylists[0] %}
+                    {% for stylist in display_stylists %}
+                        <li><a href="/stylist/{{ stylist.getId }}">{{ stylist.getName }}</a></li>
+                    {% endfor %}
+                {% else %}
+                    <h5>No Stylists Found</h5>
+                {% endif %}
             </ul>
         </div>
     </div>

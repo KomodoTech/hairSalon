@@ -6,9 +6,16 @@
         </div>
     </div>
     <div class="panel-body">
-        <h3>Stylist:</h3>
-        <ul>
-            <li><a href="/stylist/{{ client.getStylistId }}"><h3>{{ client_stylist.getName }}</h3></a></li>
-        </ul>
+        <div class="row">
+            <div class="col-sm-9">
+                <h3>Stylist:</h3>
+                <ul>
+                    <li><a href="/stylist/{{ client.getStylistId }}"><h3>{{ client_stylist.getName }}</h3></a></li>
+                </ul>
+            </div>
+            <div class="col-sm-3">
+                {% include "partials/delete_button.html.twig" %}
+            </div>
+        </div>
     </div>
 </div>

@@ -9,6 +9,10 @@
     require_once(__DIR__ . "/../src/Stylist.php");
     require_once(__DIR__ . "/../src/Client.php");
 
+    use Symfony\Component\HttpFoundation\Request;
+    Request::enableHttpMethodParameterOverride();
+
+
     /*=GLOBAL VARIABLES=======================================================*/
 
     $server = "mysql:host=localhost:8889;dbname=hair_salon";
@@ -57,6 +61,34 @@
 
                 $_POST["delete_all"] = 0;
             }
+        }
+        else if (isset($_POST["delete_client_id"]))
+        {
+            $delete_client_id = (int) $_POST["delete_client_id"];
+            if ($delete_client_id)
+            {
+                $client_to_delete = Client::findById($delete_client_id);
+                $client_to_delete->delete();
+            }
+
+            $display_stylists = Stylist::getAll();
+            $display_clients = Client::getAll();
+
+            $_POST["delete_client_id"] = 0;
+        }
+        else if (isset($_POST["delete_stylist_id"]))
+        {
+            $delete_stylist_id = (int) $_POST["delete_stylist_id"];
+            if ($delete_stylist_id)
+            {
+                $stylist_to_delete = Stylist::findById($delete_stylist_id);
+                $stylist_to_delete->delete();
+            }
+
+            $display_stylists = Stylist::getAll();
+            $display_clients = Client::getAll();
+            
+            $_POST["delete_stylist_id"] = 0;
         }
         else
         {

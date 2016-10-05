@@ -1,0 +1,9 @@
+<form action="/" method="post" class="form-group">
+    {% if client %}
+        <input type="hidden" name="delete_client_id" type="number">
+        <button id="delete-client-button" class="btn btn-danger" type="submit">DELETE CLIENT</button>
+    {% elseif stylist %}
+        <input type="hidden" name="delete_stylist_id" type="number">
+        <button id="delete-stylist-button" class="btn btn-danger" type="submit">DELETE STYLIST</button>
+    {% endif %}
+</form>

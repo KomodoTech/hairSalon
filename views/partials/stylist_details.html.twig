@@ -6,11 +6,18 @@
         </div>
     </div>
     <div class="panel-body">
-        <h3>Clients:</h3>
-        <ul>
-            {% for client in stylist.getClients %}
-                <li><a href="/client/{{ client.getId }}"><h3>{{ client.getName }}</h3></li>
-            {% endfor %}
-        </ul>
+        <div class="row">
+            <div class="col-sm-9">
+                <h3>Clients:</h3>
+                <ul>
+                    {% for client in stylist.getClients %}
+                        <li><a href="/client/{{ client.getId }}"><h3>{{ client.getName }}</h3></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-sm-3">
+                {% include "partials/delete_button.html.twig" %}
+            </div>
+        </div>
     </div>
 </div>
