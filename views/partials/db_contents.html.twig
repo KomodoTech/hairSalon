@@ -1,7 +1,15 @@
 <div class="jumbotron">
 
     {#==SEARCH BAR============================ #}
-    {% include "partials/search_bar.html.twig" %}
+    <div class="row">
+        <div id="search-div" class="col-sm-12">
+            <div class="row">
+                <div id="search-bar" class="col-sm-6">
+                    {% include "partials/search_bar.html.twig" %}
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="row">
         <div id="all-clients-display" class="col-sm-6">

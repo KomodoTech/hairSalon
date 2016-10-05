@@ -25,8 +25,6 @@
 
     //TODO: Ask diane about twig namespace, modifying the loader etc.
 
-
-
     /*=ROUTES=================================================================*/
     $app->get("/", function() use($app)
     {
@@ -82,6 +80,18 @@
             if ($delete_stylist_id)
             {
                 $stylist_to_delete = Stylist::findById($delete_stylist_id);
+                $stylist_clients = $stylist_to_delete->getClients();
+
+                $unassigned_stylist = Stylist::getUnassignedStylist();
+
+                $unassigned_stylist_id = $unassigned_stylist->getId();
+
+                for ($client_index = 0; $client_index < count($stylist_clients); $client_index++)
+                {
+                    $current_client = $stylist_clients[$client_index];
+                    $current_client->updateStylistId($unassigned_stylist_id);
+                }
+
                 $stylist_to_delete->delete();
             }
 

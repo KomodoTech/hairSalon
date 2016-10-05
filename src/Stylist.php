@@ -166,6 +166,33 @@
             return $found_stylists;
         }
 
+        /*==LAZY INSTANTIATE UNASSIGNED STYLIST================*/
+        static function getUnassignedStylist()
+        {
+            $unassigned = Stylist::findByName("UNASSIGNED");
+
+            if ($unassigned)
+            {
+                $unassigned_stylist = $unassigned[0];
+                return $unassigned_stylist;
+            }
+            else
+            {
+                $sql_command = "INSERT INTO stylists (name) VALUES ('UNASSIGNED');";
+
+                $GLOBALS['DB']->exec($sql_command);
+
+                //NOTE: figure out why recursion returned twice
+                $unassigned = Stylist::findByName("UNASSIGNED");
+
+                if ($unassigned)
+                {
+                    $unassigned_stylist = $unassigned[0];
+                    return $unassigned_stylist;
+                }
+            }
+        }
+
     }
 
 

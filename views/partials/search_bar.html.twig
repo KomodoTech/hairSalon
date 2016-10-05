@@ -1,26 +1,18 @@
-<div class="row">
-    <div id="search-div" class="col-sm-12">
-        <div class="row">
-            <div id="search-bar" class="col-sm-6">
-                <form action="/search_results" method="get">
-                    <div class="row">
-                        {% if search_term %}
-                            <div id="search-form" class="form-group col-sm-10">
-                                <input id="search-input" class="form-control" name="search_term" type="text" placeholder="Searching for: {{ search_term }}">
-                            </div>
-                        {% else %}
-                            <div id="search-form" class="form-group col-sm-10">
-                                <input id="search-input" class="form-control" name="search_term" type="text" placeholder="search">
-                            </div>
-                        {% endif %}
-                        <div id="search-button-div" class="col-sm-2">
-                            <button id="search-button" class="btn btn-default" type="submit">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                        </div>
-                    </div>
-                </form>
+<form action="/search_results" method="get">
+    <div class="row">
+        {% if search_term %}
+            <div id="search-form" class="form-group col-sm-10">
+                <input id="search-input" class="form-control" name="search_term" type="text" placeholder="Search: {{ search_term }}">
             </div>
+        {% else %}
+            <div id="search-form" class="form-group col-sm-10">
+                <input id="search-input" class="form-control" name="search_term" type="text" placeholder="search">
+            </div>
+        {% endif %}
+        <div id="search-button-div" class="col-sm-2">
+            <button id="search-button" class="btn btn-default" type="submit">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
         </div>
     </div>
-</div>
+</form>
