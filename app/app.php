@@ -181,6 +181,7 @@
         */
         $search_term = $_GET["search_term"];
         $all_stylists = Stylist::getAll();
+        $all_clients = Client::getAll();
 
         //EMPTY SEARCH TERM
         if (!$search_term)
@@ -206,7 +207,9 @@
                 "home_name" => $home_name,
                 "display_clients" => $found_clients,
                 "display_stylists" => $found_stylists,
-                "all_stylists" => $all_stylists
+                "all_stylists" => $all_stylists,
+                "all_clients" => $all_clients,
+                "search_term" => $search_term
             )
         );
     });
