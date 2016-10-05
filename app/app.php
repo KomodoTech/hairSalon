@@ -87,7 +87,7 @@
 
             $display_stylists = Stylist::getAll();
             $display_clients = Client::getAll();
-            
+
             $_POST["delete_stylist_id"] = 0;
         }
         else

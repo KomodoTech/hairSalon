@@ -161,7 +161,7 @@
 
             if (!count($found_stylists))
             {
-                print("Could not find stylist with name of " . $search_name . "\n");
+                // print("Could not find stylist with name of " . $search_name . "\n");
             }
             return $found_stylists;
         }
