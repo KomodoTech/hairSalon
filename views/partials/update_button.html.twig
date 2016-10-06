@@ -1,0 +1,9 @@
+<form action="/" method="post" class="form-group">
+    {% if client %}
+        <input type="hidden" name="update_client_name" type="text" value="{{ client.getName }}">
+        <button id="update-client-button" class="btn btn-warning" type="submit">UPDATE CLIENT</button>
+    {% elseif stylist %}
+        <input type="hidden" name="update_stylist_name" type="text" value="{{ stylist.getName }}">
+        <button id="delete-stylist-button" class="btn btn-warning" type="submit">UPDATE STYLIST</button>
+    {% endif %}
+</form>
