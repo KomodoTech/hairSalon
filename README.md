@@ -53,6 +53,45 @@ _If you wish to view the source code locally on your machine please follow the f
 
 ## Specs
 
+* 1). View Stylists/Clients
+  + IN:  
+  + OUT: 
+
+* 2). Add Stylist
+  + IN:  
+  + OUT: 
+
+* 3). Add Client To Stylist
+  + IN:  
+  + OUT: 
+
+* 4). View Client/Stylist Details
+  + IN:  
+  + OUT: 
+
+ * 5). Edit Client/Stylist Name
+  + IN:  
+  + OUT: 
+
+* 6). Edit Client Stylist
+  + IN: 
+  + OUT: 
+
+* 7). Delete All Clients and Stylists
+  + IN:
+  + OUT:
+
+* 8). Delete Specified Client/Stylist
+  + IN:
+  + OUT:
+  
+* 9). Search Client/Stylist by Id
+  + IN:
+  + OUT:
+ 
+* 10). Search Client/Stylist by Name
+  + IN:
+  + OUT:
 
 ## Known Bugs
 
