@@ -69,7 +69,7 @@ _If you wish to view the source code locally on your machine please follow the f
   + IN:  
   + OUT: 
 
- * 5). Edit Client/Stylist Name
+* 5). Edit Client/Stylist Name
   + IN:  
   + OUT: 
 
