@@ -22,7 +22,7 @@ _If you wish to view the source code locally on your machine please follow the f
   +  3). Navigate to the hairSalon directory, and execute the following command in the terminal:
           composer install
   
-  +  4). To replicate the production database used by this app use your preferred server stack (e.g. MAMP, LAMP etc) to   
+  +  4). To replicate the production database used by this app use your preferred server stack (e.g. MAMP, LAMP, etc.) to   
          launch a mysql server (using port localhost:8889, username:root, password:root, or changing the database 
          configuration in the php files to match your setup).
   
