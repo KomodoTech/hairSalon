@@ -1,9 +1,24 @@
-<form action="/" method="post" class="form-group">
     {% if client %}
-        <input type="hidden" name="update_client_name" type="text" value="{{ client.getName }}">
-        <button id="update-client-button" class="btn btn-warning" type="submit">UPDATE CLIENT</button>
+        <form action="/client/{{ client.getId }}" method="post" class="form-group">
+            {% if show_update_options %}
+                <div id="client-details-stylist-dropdown">
+                    {% include "partials/stylist_dropdown.html.twig" %}
+                </div>
+                <div id="new-client-name-input">
+                    <label for="update-client-name-input">Please Enter New Name:</label>
+                    <input id="update-client-name-input" class="form-control" name="updated_client_name" type="text">
+                </div>
+                <button id="update-client-name-button" class="btn btn-warning" type="submit">SUBMIT</button>
+            {% else %}
+                <input type="hidden" name="allow_update" type="number" value="1">
+                <button id="update-client-button" class="btn btn-warning" type="submit">UPDATE CLIENT</button>
+            {% endif %}
+        </form>
+
     {% elseif stylist %}
-        <input type="hidden" name="update_stylist_name" type="text" value="{{ stylist.getName }}">
-        <button id="delete-stylist-button" class="btn btn-warning" type="submit">UPDATE STYLIST</button>
+        <form action="/stylist/{{ stylist.getId }}" method="post" class=
+        "form-group">
+            <input type="hidden" name="update_stylist_name" type="number">
+            <button id="delete-stylist-button" class="btn btn-warning" type="button">UPDATE STYLIST</button>
+        </form>
     {% endif %}
-</form>

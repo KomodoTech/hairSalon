@@ -165,6 +165,60 @@
         );
     });
 
+    $app->post("/client/{client_id}", function($client_id) use($app) {
+        $home_name = "Chez Proot";
+        $client = Client::findById($client_id);
+
+        // CHECK IF USER PRESSED UPDATE BUTTON
+        $show_update_options = 0;
+        if (isset($_POST["allow_update"]))
+        {
+            if ($_POST["allow_update"])
+            {
+                $show_update_options = 1;
+            }
+        }
+
+        if (isset($_POST["updated_client_name"]))
+        {
+            if ($_POST["updated_client_name"])
+            {
+                $updated_client_name = $_POST["updated_client_name"];
+                $client->updateName($updated_client_name);
+            }
+        }
+
+        if (isset($_POST["stylist_id"]))
+        {
+            if ($_POST["stylist_id"])
+            {
+                $updated_stylist_id = (int) $_POST["stylist_id"];
+                // USER MADE CHANGE TO STYLIST ID
+                if ($updated_stylist_id != $client->getStylistId())
+                {
+                    $client->updateStylistId($updated_stylist_id);
+                }
+            }
+        }
+
+        $client_stylist = Stylist::findById($client->getStylistId());
+        $display_clients = Client::getAll();
+        $display_stylists = Stylist::getAll();
+
+        return $app["twig"]->render("home.html.twig",
+            array(
+                "display_clients" => $display_clients,
+                "display_stylists" => $display_stylists,
+                "all_stylists" => $display_stylists,
+                "home_name" => $home_name,
+                "client" => $client,
+                "client_stylist" => $client_stylist,
+                "show_details" => 1,
+                "show_update_options" => $show_update_options
+            )
+        );
+    });
+
     $app->get("/stylist/{stylist_id}", function($stylist_id) use($app) {
         $home_name = "Chez Proot";
         $display_clients = Client::getAll();

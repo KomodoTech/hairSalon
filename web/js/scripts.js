@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    $(".stylist-dropdown-list li:not(.divider)").click(function(){
+    $(".stylist-dropdown-list li:not(.divider)").click(function() {
         //get value from list element
         var stylistId = parseInt($(this).attr("value"));
         var stylistName = $(this).attr("id");
@@ -10,8 +10,7 @@ $(document).ready(function() {
         $("#stylist-dropdown .dropdown-button-text p").text(stylistName);
     });
 
-    $("#delete-all").click(function(){
+    $("#delete-all").click(function() {
         $("input[name='delete_all']").val(1);
     });
-
 });
