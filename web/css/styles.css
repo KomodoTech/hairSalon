@@ -85,11 +85,6 @@ body
 }
 
 /*===CHOOSE STYLIST DROPDOWN=====================================*/
-.dropdown
-{
-    float: right;
-}
-
 .dropdown-button-text
 {
     float: left;
@@ -108,10 +103,16 @@ body
     margin-top: 5px;
 }
 
+#add-client-stylist-dropdown > .dropdown
+{
+    float: right;
+}
+
 #client-details-stylist-dropdown
 {
     display: block;
     width: 100%;
+    height: 34px;
 }
 
 /*===SEARCH BAR==================================================*/
@@ -166,7 +167,7 @@ body
 /*===MEDIA QUERIES===========================================================*/
 @media (min-width: 768px)
 {
-    #stylist-dropdown-div
+    #add-client-stylist-dropdown
     {
         padding-left: 0;
     }
