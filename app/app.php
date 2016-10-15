@@ -33,8 +33,12 @@
     $app->get("/", function() use($app)
     {
         $home_name = "Chez Proot";
-        $display_clients = Client::getAll();
         $display_stylists = Stylist::getAll();
+
+        // CHECK FOR UNASSIGNED STYLIST
+        Stylist::moveUnassignedStylistToBeginning($display_stylists);
+
+        $display_clients = Client::getAll();
 
         return $app["twig"]->render("home.html.twig",
             array(
@@ -76,6 +80,11 @@
             if ($delete_client_id)
             {
                 $client_to_delete = Client::findById($delete_client_id);
+
+                // CHECK TO SEE IF CLIENT WAS LAST UNASSIGNED CLIENT
+                // IF SO THEN DELETE UNASSIGNED STYLIST
+                if ($client_to_delete->getStylistId)
+
                 $client_to_delete->delete();
             }
 

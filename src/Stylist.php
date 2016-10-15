@@ -18,7 +18,6 @@
             return (string) $this->name;
         }
 
-        //TODO: update database after calling setName
         function setName($new_name)
         {
             $this->name = (string) $new_name;
@@ -192,6 +191,87 @@
                 }
             }
         }
+
+        /*NOTE:
+         * If no UNASSIGNED stylist has been created then returns null.
+         * If UNASSIGNED stylist exists and is unique, then it is returned.
+         * If UNASSIGNED stylist existes but is not unique, first stylist with the
+         * name UNASSIGNED is designated official, and all clients belonging to
+         * "unoffical" UNASSIGNED stylists are reassigned to the "official" one.
+         * Finally, all unoffical UNASSIGNED stylists are deleted once they are no
+         * longer linked to any clients
+         */
+        static function getUniqueUnassignedStylist($stylists)
+        {
+            $unassigned_counter = 0;
+            $unassigned_stylist = NULL;
+            for ($stylist_index = 0; $stylist_index < count($display_stylists); $stylist_index++)
+            {
+                $current_stylist = $display_stylists[$stylist_index];
+                if ($current_stylist->getName() === "UNASSIGNED")
+                {
+                    // CHECK IF THERE ARE MULTIPLE UNASSIGNED STYLISTS
+                    if (!$unassigned_counter)
+                    {
+                        $unassigned_stylist = $current_stylist;
+                    }
+                    // REASSIGN CLIENTS OF UNOFFICIAL UNASSIGNED STYLIST TO OFFICIAL
+                    // AKA FIRST UNASSIGNED STYLIST
+                    else
+                    {
+                        $unassigned_stylist_id = $unassigned_stylist->getId();
+
+                        $unassigned_clients = $current_stylist->getClients();
+
+                        for ($client_index = 0; $client_index < count($unassigned_clients); $client_index++)
+                        {
+                            $current_client = $unassigned_clients[$client_index];
+                            /* NOTE:
+                             * CLIENT CAN ONLY HAVE ONE STYLIST SO OVERLAP SHOULD NOT
+                             * BE A PROBLEM
+                             */
+                             $current_client->updateStylistId($unassigned_stylist_id);
+                        }
+                        /* AFTER ALL CLIENTS REASSIGNED DELETE DUPLICATED UNASSIGNED
+                         * STYLIST.
+                         */
+                         $current_stylist->delete();
+                    }
+                    $unassigned_counter++;
+                }
+            }
+            return $unassigned_stylist;
+        }
+
+
+        // FOR REORDERING STYLISTS TO HAVE UNASSIGNED AT INDEX 0
+        static function moveUnassignedStylistToBeginning($stylists)
+        {
+            $unique_unassigned_stylist = self::getUniqueUnassignedStylist($stylists);
+            if ($unique_unassigned_stylist)
+            {
+                // PUSH NEW EMPTY OBJ TO END OF ARRAY
+                $stylists[] = NULL;
+                // REORDER STYLISTS SO THAT UNASSIGNED IS ALWAYS FIRST
+                for ($stylist_index = count($stylists) - 1; $stylist_index >= 0; $stylist_index--)
+                {
+                    // IF UNASSIGNED STYLIST THEN DELETE AND MOVE ON
+                    if ($current_stylist === $unique_unassigned_stylist)
+                    {
+                        $current_stylist->delete();
+                    }
+                    else
+                    {
+                        $current_stylist = $stylists[$stylist_index];
+                        $stylists[$stylist_index + 1] = $current_stylist;
+                    }
+                }
+                // FINALLY REINSERT UNASSIGNED STYLIST AT INDEX 0
+                $stylists[0] = $unique_unassigned_stylist;
+            }
+            return $stylists;
+        }
+
 
     }
 
