@@ -164,6 +164,10 @@ body
     margin-left: 99%;
 }
 
+#update-stylist-name-input
+{
+    margin-bottom: 10px;
+}
 
 /*===MEDIA QUERIES===========================================================*/
 @media (min-width: 768px)

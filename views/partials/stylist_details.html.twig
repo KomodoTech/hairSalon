@@ -11,16 +11,12 @@
                 <h3>Clients:</h3>
                 <ul>
                     {% for client in stylist.getClients %}
-                        <li><a href="/client/{{ client.getId }}"><h3>{{ client.getName }}</h3></li>
+                        <li><a href="/client/{{ client.getId }}"><h3>{{ client.getName }}</h3></a></li>
                     {% endfor %}
                 </ul>
             </div>
             <div class="col-sm-3">
                 {% include "partials/delete_button.html.twig" %}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3 col-sm-push-9">
                 {% include "partials/update_button.html.twig" %}
             </div>
         </div>

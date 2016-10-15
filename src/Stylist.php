@@ -69,7 +69,7 @@
             return $clients_of_stylist;
         }
 
-        function update($new_name)
+        function updateName($new_name)
         {
             $id = $this->getId();
             $sql_command = "UPDATE stylists SET name = '" . $new_name . "' WHERE id = " . $id . ";";
