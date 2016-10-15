@@ -26,6 +26,10 @@
     //TODO: Ask diane about twig namespace, modifying the loader etc.
 
     /*=ROUTES=================================================================*/
+
+    /*=HOME===================================================================*/
+    /*======DISPLAY STYLISTS AND CLIENTS======================================*/
+
     $app->get("/", function() use($app)
     {
         $home_name = "Chez Proot";
@@ -42,10 +46,14 @@
         );
     });
 
+    /*======DISPLAY CLIENTS AND STYLISTS AFTER DELETE ALL, DELETE SINGLE OBJECT,
+    CREATE NEW OBJECT=========================================================*/
+
     $app->post("/", function() use($app)
     {
         $home_name = "Chez Proot";
 
+        /*===========DELETE ALL===============================================*/
         if (isset($_POST["delete_all"]))
         {
             $delete_all = (int) $_POST["delete_all"];
@@ -60,6 +68,8 @@
                 $_POST["delete_all"] = 0;
             }
         }
+
+        /*===========DELETE CLIENT===============================================*/
         else if (isset($_POST["delete_client_id"]))
         {
             $delete_client_id = (int) $_POST["delete_client_id"];
@@ -74,6 +84,8 @@
 
             $_POST["delete_client_id"] = 0;
         }
+
+        /*===========DELETE STYLIST===========================================*/
         else if (isset($_POST["delete_stylist_id"]))
         {
             $delete_stylist_id = (int) $_POST["delete_stylist_id"];
@@ -100,8 +112,12 @@
 
             $_POST["delete_stylist_id"] = 0;
         }
+
+        /*===========CREATE===================================================*/
         else
         {
+            /*=========CREATE NEW STYLIST=====================================*/
+
             if (isset($_POST["new_stylist"]))
             {
                 $new_stylist_name = $_POST["new_stylist"];
@@ -115,6 +131,9 @@
 
             $display_stylists = Stylist::getAll();
 
+
+            /*=========CREATE NEW CLIENT=====================================*/
+            /*NOTE: new client must be asscociated with a valid stylist */
             if (isset($_POST["new_client"]) && isset($_POST["stylist_id"]))
             {
                 $new_client_name = $_POST["new_client"];
@@ -124,7 +143,7 @@
                 {
                     $new_client = new Client($new_client_name, $new_client_stylist_id);
                     $new_client->save();
-                    /*
+                    /* NOTE:
                         RESET stylist_id in $_POST SO that submitting new client without
                         choosing a stylist does not save a new client to the database
                     */
@@ -145,6 +164,7 @@
         );
     });
 
+    /*=========VIEW CLIENT DETAILS============================================*/
     $app->get("/client/{client_id}", function($client_id) use($app) {
         $home_name = "Chez Proot";
         $display_clients = Client::getAll();
@@ -165,6 +185,7 @@
         );
     });
 
+    /*=========VIEW CLIENT AFTER EDITING======================================*/
     $app->post("/client/{client_id}", function($client_id) use($app) {
         $home_name = "Chez Proot";
         $client = Client::findById($client_id);
@@ -184,7 +205,11 @@
             if ($_POST["updated_client_name"])
             {
                 $updated_client_name = $_POST["updated_client_name"];
-                $client->updateName($updated_client_name);
+                // USER MADE CHANGE TO CLIENT NAME
+                if ($updated_client_name != $client->getName())
+                {
+                    $client->updateName($updated_client_name);
+                }
             }
         }
 
@@ -219,6 +244,7 @@
         );
     });
 
+    /*=========VIEW STYLIST===================================================*/
     $app->get("/stylist/{stylist_id}", function($stylist_id) use($app) {
         $home_name = "Chez Proot";
         $display_clients = Client::getAll();
@@ -237,6 +263,51 @@
         );
     });
 
+    /*=========VIEW STYLIST AFTER EDITING=====================================*/
+    $app->post("/stylist/{stylist_id}", function($stylist_id) use($app) {
+        $home_name = "Chez Proot";
+        $stylist = Stylist::findById($stylist_id);
+
+        // CHECK IF USER PRESSED UPDATE BUTTON
+        $show_update_options = 0;
+        if (isset($_POST["allow_update"]))
+        {
+            if ($_POST["allow_update"])
+            {
+                $show_update_options = 1;
+            }
+        }
+
+        if (isset($_POST["updated_stylist_name"]))
+        {
+            if ($_POST["updated_stylist_name"])
+            {
+                $updated_stylist_name = $_POST["updated_stylist_name"];
+                // USER MADE CHANGE TO STYLIST NAME
+                if ($updated_stylist_name != $stylist->getName())
+                {
+                    $stylist->updateName($updated_stylist_name);
+                }
+            }
+        }
+
+        $display_clients = Client::getAll();
+        $display_stylists = Stylist::getAll();
+        return $app["twig"]->render("home.html.twig",
+            array(
+                "display_clients" => $display_clients,
+                "display_stylists" => $display_stylists,
+                "all_stylists" => $display_stylists,
+                "home_name" => $home_name,
+                "stylist" => $stylist,
+                "show_details" => 1,
+                "show_update_options" => $show_update_options
+            )
+        );
+    });
+
+
+    /*=========VIEW SEARCH RESULTS============================================*/
     $app->get("/search_results" , function() use($app) {
         $home_name = "Chez Proot";
 
@@ -247,7 +318,7 @@
         $all_stylists = Stylist::getAll();
         $all_clients = Client::getAll();
 
-        //EMPTY SEARCH TERM
+        //EMPTY SEARCH TERM RETURNS ALL CLIENTS AND STYLISTS
         if (!$search_term)
         {
             $found_clients = Client::getAll();
