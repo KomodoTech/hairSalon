@@ -231,6 +231,7 @@
                              * CLIENT CAN ONLY HAVE ONE STYLIST SO OVERLAP SHOULD NOT
                              * BE A PROBLEM
                              */
+                             //TODO: figure out why this isn't being called in tests
                              $current_client->updateStylistId($unassigned_stylist_id);
                         }
                         /* AFTER ALL CLIENTS REASSIGNED DELETE DUPLICATED UNASSIGNED

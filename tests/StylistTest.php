@@ -399,54 +399,56 @@
         function test_findUniqueUnassignedStylistEANU()
         {
             //ARRANGE
+            $unassigned_name = "UNASSIGNED";
+
             $stylist_name = "S_Helper Scalper";
             $new_stylist = new Stylist($stylist_name);
             $new_stylist->save();
             $new_stylist_id = $new_stylist->getId();
 
-            $client_name5 = "C_Moose Gamut";
-            $new_client5 = new Client($client_name5, $new_stylist_id);
-            $new_client5->save();
-
-            // OFFICIAL UNASSIGNED
-            $stylist_name2 = "UNASSIGNED";
-            $new_stylist2 = new Stylist($stylist_name2);
-            $new_stylist2->save();
-            $new_stylist_id2 = $new_stylist2->getId();
-
-            $client_name = "C_Official Lemon";
-            $new_client = new Client($client_name, $new_stylist_id2);
+            $client_name = "C_Moose Gamut";
+            $new_client = new Client($client_name, $new_stylist_id);
             $new_client->save();
 
+            // OFFICIAL UNASSIGNED
+            $official_unassigned_stylist = new Stylist($unassigned_name);
+            $official_unassigned_stylist->save();
+            $official_unassigned_stylist_id = $official_unassigned_stylist->getId();
+
+            $client_name2 = "C_Official Lemon";
+            $new_client2 = new Client($client_name2, $official_unassigned_stylist_id);
+            $new_client2->save();
+
             $client_name3 = "C_Official Lime";
-            $new_client3 = new Client($client_name3, $new_stylist_id2);
+            $new_client3 = new Client($client_name3, $official_unassigned_stylist_id);
             $new_client3->save();
 
             //UNOFFICIAL UNASSIGNED
-            $stylist_name3 = "UNASSIGNED";
-            $new_stylist3 = new Stylist($stylist_name3);
-            $new_stylist3->save();
-            $new_stylist_id3 = $new_stylist3->getId();
+            $unofficial_unassigned_stylist = new Stylist($unassigned_name);
+            $unofficial_unassigned_stylist->save();
+            $unofficial_unassigned_stylist_id = $unofficial_unassigned_stylist->getId();
 
-            $client_name2 = "C_Unofficial Lemon";
-            $new_client2 = new Client($client_name2, $new_stylist_id3);
-            $new_client2->save();
-
-            $client_name4 = "C_Unofficial Lime";
-            $new_client4 = new Client($client_name4, $new_stylist_id3);
+            $client_name4 = "C_Unofficial Lemon";
+            $new_client4 = new Client($client_name4, $unofficial_unassigned_stylist_id);
             $new_client4->save();
 
+            $client_name5 = "C_Unofficial Lime";
+            $new_client5 = new Client($client_name5, $unofficial_unassigned_stylist_id);
+            $new_client5->save();
 
-            $stylists = [$new_stylist, $new_stylist2, $new_stylist3];
-
-            /*NOTE:
-             * just checking $new_stylist3 would not guarantee that clients
-             * were reassigned properly in the database.
-             */
-            $expected_output = [$new_stylist3, [$new_client, $new_client2, $new_client3, $new_client4]];
+            $stylists = [$new_stylist, $official_unassigned_stylist, $unofficial_unassigned_stylist];
 
             //ACT
             $unassigned_stylist = Stylist::findUniqueUnassignedStylist($stylists);
+
+            /*NOTE:
+            * just checking $official_unassigned_stylist would not guarantee that clients
+            * were reassigned properly in the database. Also, if we do not wait for update
+            * to occur to the clients who get reassigned, the assertion will be false,
+            * since the clients will have different stylist_ids
+            */
+            $expected_output = [$official_unassigned_stylist, [$new_client2, $new_client3, $new_client4, $new_client5]];
+
             $unassigned_stylist_clients = $unassigned_stylist->getClients();
             $result = [$unassigned_stylist, $unassigned_stylist_clients];
 
