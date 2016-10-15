@@ -190,6 +190,7 @@
                     return $unassigned_stylist;
                 }
             }
+            return NULL;
         }
 
         /*NOTE:
@@ -201,13 +202,13 @@
          * Finally, all unoffical UNASSIGNED stylists are deleted once they are no
          * longer linked to any clients
          */
-        static function getUniqueUnassignedStylist($stylists)
+        static function findUniqueUnassignedStylist($stylists)
         {
             $unassigned_counter = 0;
             $unassigned_stylist = NULL;
-            for ($stylist_index = 0; $stylist_index < count($display_stylists); $stylist_index++)
+            for ($stylist_index = 0; $stylist_index < count($stylists); $stylist_index++)
             {
-                $current_stylist = $display_stylists[$stylist_index];
+                $current_stylist = $stylists[$stylist_index];
                 if ($current_stylist->getName() === "UNASSIGNED")
                 {
                     // CHECK IF THERE ARE MULTIPLE UNASSIGNED STYLISTS
@@ -247,7 +248,7 @@
         // FOR REORDERING STYLISTS TO HAVE UNASSIGNED AT INDEX 0
         static function moveUnassignedStylistToBeginning($stylists)
         {
-            $unique_unassigned_stylist = self::getUniqueUnassignedStylist($stylists);
+            $unique_unassigned_stylist = self::findUniqueUnassignedStylist($stylists);
             if ($unique_unassigned_stylist)
             {
                 // PUSH NEW EMPTY OBJ TO END OF ARRAY

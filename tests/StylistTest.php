@@ -275,5 +275,183 @@
             //ASSERT
             $this->assertEquals($expected_output, $result);
         }
+
+        //DNE = DOES NOT EXIST
+        function test_getUnassignedStylistDNE()
+        {
+            //ARRANGE
+            $stylist_name = "S_Damn Daniel";
+            $new_stylist = new Stylist($stylist_name);
+            $new_stylist->save();
+
+            $stylist_name2 = "S_Norf Thace";
+            $new_stylist2 = new Stylist($stylist_name2);
+            $new_stylist2->save();
+
+            $expected_output = "UNASSIGNED";
+
+            //ACT
+            $unassigned_stylist = Stylist::getUnassignedStylist();
+            $result = $unassigned_stylist->getName();
+
+            //ASSERT
+            $this->assertEquals($expected_output, $result);
+        }
+
+        //EAU = EXISTS AND UNIQUE
+        function test_getUnassignedStylistEAU()
+        {
+            //ARRANGE
+            $stylist_name = "S_Gone Giraffe";
+            $new_stylist = new Stylist($stylist_name);
+            $new_stylist->save();
+
+            $stylist_name2 = "UNASSIGNED";
+            $new_stylist2 = new Stylist($stylist_name2);
+            $new_stylist2->save();
+            $new_stylist_id2 = $new_stylist2->getId();
+
+
+            $expected_output = $new_stylist_id2;
+
+            //ACT
+            $unassigned_stylist = Stylist::getUnassignedStylist();
+            $result = $unassigned_stylist->getId();
+
+            //ASSERT
+            $this->assertEquals($expected_output, $result);
+        }
+
+        //EANU = EXISTS AND NOT UNIQUE
+        function test_getUnassignedStylistEANU()
+        {
+            //ARRANGE
+            $stylist_name = "S_Helper Scalper";
+            $new_stylist = new Stylist($stylist_name);
+            $new_stylist->save();
+
+            $stylist_name2 = "UNASSIGNED";
+            $new_stylist2 = new Stylist($stylist_name2);
+            $new_stylist2->save();
+            $new_stylist_id2 = $new_stylist2->getId();
+
+            $stylist_name3 = "UNASSIGNED";
+            $new_stylist3 = new Stylist($stylist_name3);
+            $new_stylist3->save();
+
+            $expected_output = $new_stylist_id2;
+
+            //ACT
+            $unassigned_stylist = Stylist::getUnassignedStylist();
+            $result = $unassigned_stylist->getId();
+
+            //ASSERT
+            $this->assertEquals($expected_output, $result);
+        }
+
+        //DNE = DOES NOT EXIST
+        function test_findUniqueUnassignedStylistDNE()
+        {
+            //ARRANGE
+            $stylist_name = "S_Lifts McGee";
+            $new_stylist = new Stylist($stylist_name);
+            $new_stylist->save();
+
+            $stylist_name2 = "S_Full Swervice";
+            $new_stylist2 = new Stylist($stylist_name2);
+            $new_stylist2->save();
+
+            $stylists = [$new_stylist, $new_stylist2];
+
+            $expected_output = NULL;
+
+            //ACT
+            $result = Stylist::findUniqueUnassignedStylist($stylists);
+
+            //ASSERT
+            $this->assertEquals($expected_output, $result);
+        }
+
+        //EAU = EXISTS AND UNIQUE
+        function test_findUniqueUnassignedStylistEAU()
+        {
+            //ARRANGE
+            $stylist_name = "S_Horticulture Fiend";
+            $new_stylist = new Stylist($stylist_name);
+            $new_stylist->save();
+
+            $stylist_name2 = "UNASSIGNED";
+            $new_stylist2 = new Stylist($stylist_name2);
+            $new_stylist2->save();
+
+            $stylists = [$new_stylist, $new_stylist2];
+
+            $expected_output = $new_stylist2;
+
+            //ACT
+            $result = Stylist::findUniqueUnassignedStylist($stylists);
+
+            //ASSERT
+            $this->assertEquals($expected_output, $result);
+        }
+
+        //EANU = EXISTS AND NOT UNIQUE
+        function test_findUniqueUnassignedStylistEANU()
+        {
+            //ARRANGE
+            $stylist_name = "S_Helper Scalper";
+            $new_stylist = new Stylist($stylist_name);
+            $new_stylist->save();
+            $new_stylist_id = $new_stylist->getId();
+
+            $client_name5 = "C_Moose Gamut";
+            $new_client5 = new Client($client_name5, $new_stylist_id);
+            $new_client5->save();
+
+            // OFFICIAL UNASSIGNED
+            $stylist_name2 = "UNASSIGNED";
+            $new_stylist2 = new Stylist($stylist_name2);
+            $new_stylist2->save();
+            $new_stylist_id2 = $new_stylist2->getId();
+
+            $client_name = "C_Official Lemon";
+            $new_client = new Client($client_name, $new_stylist_id2);
+            $new_client->save();
+
+            $client_name3 = "C_Official Lime";
+            $new_client3 = new Client($client_name3, $new_stylist_id2);
+            $new_client3->save();
+
+            //UNOFFICIAL UNASSIGNED
+            $stylist_name3 = "UNASSIGNED";
+            $new_stylist3 = new Stylist($stylist_name3);
+            $new_stylist3->save();
+            $new_stylist_id3 = $new_stylist3->getId();
+
+            $client_name2 = "C_Unofficial Lemon";
+            $new_client2 = new Client($client_name2, $new_stylist_id3);
+            $new_client2->save();
+
+            $client_name4 = "C_Unofficial Lime";
+            $new_client4 = new Client($client_name4, $new_stylist_id3);
+            $new_client4->save();
+
+
+            $stylists = [$new_stylist, $new_stylist2, $new_stylist3];
+
+            /*NOTE:
+             * just checking $new_stylist3 would not guarantee that clients
+             * were reassigned properly in the database.
+             */
+            $expected_output = [$new_stylist3, [$new_client, $new_client2, $new_client3, $new_client4]];
+
+            //ACT
+            $unassigned_stylist = Stylist::findUniqueUnassignedStylist($stylists);
+            $unassigned_stylist_clients = $unassigned_stylist->getClients();
+            $result = [$unassigned_stylist, $unassigned_stylist_clients];
+
+            //ASSERT
+            $this->assertEquals($expected_output, $result);
+        }
     }
  ?>
