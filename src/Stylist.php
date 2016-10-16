@@ -195,17 +195,19 @@
 
         /*NOTE:
          * If no UNASSIGNED stylist has been created then returns null.
-         * If UNASSIGNED stylist exists and is unique, then it is returned.
+         * If UNASSIGNED stylist exists and is unique, then an unmodified array
+         * of stylists is returned.
          * If UNASSIGNED stylist existes but is not unique, first stylist with the
          * name UNASSIGNED is designated official, and all clients belonging to
          * "unoffical" UNASSIGNED stylists are reassigned to the "official" one.
          * Finally, all unoffical UNASSIGNED stylists are deleted once they are no
-         * longer linked to any clients
+         * longer linked to any clients. The modified array is returned;
          */
-        static function findUniqueUnassignedStylist($stylists)
+        static function makeUnassignedStylistUnique($stylists)
         {
             $unassigned_counter = 0;
             $unassigned_stylist = NULL;
+            $modified_stylists = [];
             for ($stylist_index = 0; $stylist_index < count($stylists); $stylist_index++)
             {
                 $current_stylist = $stylists[$stylist_index];
@@ -215,6 +217,7 @@
                     if (!$unassigned_counter)
                     {
                         $unassigned_stylist = $current_stylist;
+                        $modified_stylists[] = $current_stylist;
                     }
                     // REASSIGN CLIENTS OF UNOFFICIAL UNASSIGNED STYLIST TO OFFICIAL
                     // AKA FIRST UNASSIGNED STYLIST
@@ -242,21 +245,30 @@
                     }
                     $unassigned_counter++;
                 }
+                // CURRENT STYLIST IS NOT SPECIAL UNASSIGNED STYLIST
+                else
+                {
+                    $modified_stylists[] = $current_stylist;
+                }
             }
-            return $unassigned_stylist;
+            return $modified_stylists;
         }
 
 
         // FOR REORDERING STYLISTS TO HAVE UNASSIGNED AT INDEX 0
         static function moveUnassignedStylistToBeginning($stylists)
         {
-            $unique_unassigned_stylist = self::findUniqueUnassignedStylist($stylists);
+            $unique_unassigned_stylist = self::makeUnassignedStylistUnique($stylists);
+            print("\nstylists unique unassigned:\n");
+            var_dump($stylists);
+            print("\n");
+
             if ($unique_unassigned_stylist)
             {
                 // PUSH NEW EMPTY OBJ TO END OF ARRAY
                 $stylists[] = NULL;
                 // REORDER STYLISTS SO THAT UNASSIGNED IS ALWAYS FIRST
-                for ($stylist_index = count($stylists) - 1; $stylist_index >= 0; $stylist_index--)
+                for ($stylist_index = count($stylists) - 2; $stylist_index >= 0; $stylist_index--)
                 {
                     // IF UNASSIGNED STYLIST THEN DELETE AND MOVE ON
                     if ($current_stylist === $unique_unassigned_stylist)
