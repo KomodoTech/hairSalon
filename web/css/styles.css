@@ -140,12 +140,19 @@ body
     margin-bottom: 10px;
 }
 
-/*===SEARCH BAR==================================================*/
+/*===CLIENTS STYLISTS LIST====================================================*/
+
+#database-contents-list
+{
+    /* In order to move delete-all button to the bottom of the div */
+    position: relative;
+}
+
+/*================SEARCH BAR==================================================*/
 #search-bar
 {
     float: right;
 }
-
 
 #search-button-div
 {
@@ -164,6 +171,17 @@ body
     float: left;
     padding: 0;
 }
+
+/*=========DELETE ALL BUTTON==================================================*/
+#delete-all
+{
+    position: absolute;
+    width: 90%;
+    bottom: 5%;
+    left: 5%;
+}
+
+
 
 /*===OBJECT DETAILS STYLING======================================*/
 

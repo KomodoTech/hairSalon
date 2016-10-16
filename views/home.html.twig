@@ -17,12 +17,9 @@
                             {% include "partials/add_new_client.html.twig" %}
                         {% endif %}
 
-                        {% if display_stylists or display_clients or all_stylists or all_clients %}
-                            {% include "partials/delete_all_button.html.twig" %}
-                        {% endif %}
                     </div>
                     <div class="col-sm-6">
-                        {% include "partials/db_contents.html.twig" %}
+                        {% include "partials/db_contents.html.twig" %}    
                     </div>
                 </div>
 

@@ -1,4 +1,4 @@
-<div class="jumbotron">
+<div id="database-contents-list" class="jumbotron">
 
     {#==SEARCH BAR============================ #}
     <div class="row">
@@ -37,4 +37,7 @@
             </ul>
         </div>
     </div>
+    {% if display_stylists or display_clients or all_stylists or all_clients %}
+        {% include "partials/delete_all_button.html.twig" %}
+    {% endif %}
 </div>
