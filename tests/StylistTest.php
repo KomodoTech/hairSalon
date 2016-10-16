@@ -436,6 +436,13 @@
             $new_client5 = new Client($client_name5, $unofficial_unassigned_stylist_id);
             $new_client5->save();
 
+
+            // HACK: TO DEAL WITH LOCAL CLIENTS NOT BEING UPDATED CORRECTLY DUE
+            // ASK DIANE FOR RECOMMENDATIONS
+            $new_client4_updated = new Client($client_name4, $official_unassigned_stylist_id, $new_client4->getId());
+            $new_client5_updated = new Client($client_name5, $official_unassigned_stylist_id, $new_client5->getId());
+
+
             $stylists = [$new_stylist, $official_unassigned_stylist, $unofficial_unassigned_stylist];
 
             //ACT
@@ -443,11 +450,12 @@
 
             /*NOTE:
             * just checking $official_unassigned_stylist would not guarantee that clients
-            * were reassigned properly in the database. Also, if we do not wait for update
-            * to occur to the clients who get reassigned, the assertion will be false,
-            * since the clients will have different stylist_ids
+            * were reassigned properly in the database. Also, getClients will return new
+            * Client objects created from the database with the updated information. THE
+            * WARN: PREVIOUSLY EXISTING CLIENTS HAVE NEVER BEEN UPDATED WITH THE CORRECT
+            * INFORMATION!!
             */
-            $expected_output = [$official_unassigned_stylist, [$new_client2, $new_client3, $new_client4, $new_client5]];
+            $expected_output = [$official_unassigned_stylist, [$new_client2, $new_client3, $new_client4_updated, $new_client5_updated]];
 
             $unassigned_stylist_clients = $unassigned_stylist->getClients();
             $result = [$unassigned_stylist, $unassigned_stylist_clients];

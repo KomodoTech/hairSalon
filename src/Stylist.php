@@ -222,6 +222,8 @@
                     {
                         $unassigned_stylist_id = $unassigned_stylist->getId();
 
+                        // NOTE: this creates new clients based on data in the database
+                        // This will NOT return a reference to existing local client objects
                         $unassigned_clients = $current_stylist->getClients();
 
                         for ($client_index = 0; $client_index < count($unassigned_clients); $client_index++)
@@ -231,7 +233,6 @@
                              * CLIENT CAN ONLY HAVE ONE STYLIST SO OVERLAP SHOULD NOT
                              * BE A PROBLEM
                              */
-                             //TODO: figure out why this isn't being called in tests
                              $current_client->updateStylistId($unassigned_stylist_id);
                         }
                         /* AFTER ALL CLIENTS REASSIGNED DELETE DUPLICATED UNASSIGNED
