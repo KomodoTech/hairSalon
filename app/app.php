@@ -36,7 +36,7 @@
         $display_stylists = Stylist::getAll();
 
         // CHECK FOR UNASSIGNED STYLIST
-        Stylist::moveUnassignedStylistToBeginning($display_stylists);
+        $display_stylists = Stylist::moveUnassignedStylistToBeginning($display_stylists);
 
         $display_clients = Client::getAll();
 
@@ -67,6 +67,8 @@
                 Stylist::deleteAll();
 
                 $display_stylists = Stylist::getAll();
+                // CHECK FOR UNASSIGNED STYLIST
+                $display_stylists = Stylist::moveUnassignedStylistToBeginning($display_stylists);
                 $display_clients = Client::getAll();
 
                 $_POST["delete_all"] = 0;
@@ -89,6 +91,8 @@
             }
 
             $display_stylists = Stylist::getAll();
+            // CHECK FOR UNASSIGNED STYLIST
+            $display_stylists = Stylist::moveUnassignedStylistToBeginning($display_stylists);
             $display_clients = Client::getAll();
 
             $_POST["delete_client_id"] = 0;
@@ -117,6 +121,8 @@
             }
 
             $display_stylists = Stylist::getAll();
+            // CHECK FOR UNASSIGNED STYLIST
+            $display_stylists = Stylist::moveUnassignedStylistToBeginning($display_stylists);
             $display_clients = Client::getAll();
 
             $_POST["delete_stylist_id"] = 0;
@@ -139,6 +145,8 @@
             }
 
             $display_stylists = Stylist::getAll();
+            // CHECK FOR UNASSIGNED STYLIST
+            $display_stylists = Stylist::moveUnassignedStylistToBeginning($display_stylists);
 
 
             /*=========CREATE NEW CLIENT=====================================*/
@@ -178,6 +186,8 @@
         $home_name = "Chez Proot";
         $display_clients = Client::getAll();
         $display_stylists = Stylist::getAll();
+        // CHECK FOR UNASSIGNED STYLIST
+        $display_stylists = Stylist::moveUnassignedStylistToBeginning($display_stylists);
 
         $client = Client::findById($client_id);
         $client_stylist = Stylist::findById($client->getStylistId());
@@ -238,6 +248,8 @@
         $client_stylist = Stylist::findById($client->getStylistId());
         $display_clients = Client::getAll();
         $display_stylists = Stylist::getAll();
+        // CHECK FOR UNASSIGNED STYLIST
+        $display_stylists = Stylist::moveUnassignedStylistToBeginning($display_stylists);
 
         return $app["twig"]->render("home.html.twig",
             array(
@@ -258,6 +270,8 @@
         $home_name = "Chez Proot";
         $display_clients = Client::getAll();
         $display_stylists = Stylist::getAll();
+        // CHECK FOR UNASSIGNED STYLIST
+        $display_stylists = Stylist::moveUnassignedStylistToBeginning($display_stylists);
 
         $stylist = Stylist::findById($stylist_id);
         return $app["twig"]->render("home.html.twig",
@@ -302,6 +316,8 @@
 
         $display_clients = Client::getAll();
         $display_stylists = Stylist::getAll();
+        // CHECK FOR UNASSIGNED STYLIST
+        $display_stylists = Stylist::moveUnassignedStylistToBeginning($display_stylists);
         return $app["twig"]->render("home.html.twig",
             array(
                 "display_clients" => $display_clients,
@@ -325,6 +341,8 @@
         */
         $search_term = $_GET["search_term"];
         $all_stylists = Stylist::getAll();
+        // CHECK FOR UNASSIGNED STYLIST
+        $all_stylists = Stylist::moveUnassignedStylistToBeginning($all_stylists);
         $all_clients = Client::getAll();
 
         //EMPTY SEARCH TERM RETURNS ALL CLIENTS AND STYLISTS
@@ -332,6 +350,8 @@
         {
             $found_clients = Client::getAll();
             $found_stylists = Stylist::getAll();
+            // CHECK FOR UNASSIGNED STYLIST
+            $found_stylists = Stylist::moveUnassignedStylistToBeginning($found_stylists);
         }
         //SEARCHING BY ID
         else if (is_numeric($search_term))
