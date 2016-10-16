@@ -16,7 +16,9 @@
                 </ul>
             </div>
             <div class="col-sm-3">
-                {% include "partials/delete_button.html.twig" %}
+                {% if stylist.getName != "UNASSIGNED" %}
+                    {% include "partials/delete_button.html.twig" %}
+                {% endif %}
                 {% include "partials/update_button.html.twig" %}
             </div>
         </div>

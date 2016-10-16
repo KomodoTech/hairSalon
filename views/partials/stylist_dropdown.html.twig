@@ -8,7 +8,9 @@
     <ul class="dropdown-menu stylist-dropdown-list" aria-labelledby="stylist-dropdown" name="stylist_id">
         <li role="separator" class="divider"></li>
         {% for stylist in all_stylists %}
-            <li id="{{ stylist.getName }}" value="{{ stylist.getId }}">{{ stylist.getName }}</li>
+            {% if stylist.getName != "UNASSIGNED" %}
+                <li id="{{ stylist.getName }}" value="{{ stylist.getId }}">{{ stylist.getName }}</li>
+            {% endif %}
         {% endfor %}
     </ul>
     <!--NOTE:

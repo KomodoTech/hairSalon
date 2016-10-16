@@ -282,9 +282,5 @@
             }
             return $stylists;
         }
-
-
     }
-
-
  ?>
