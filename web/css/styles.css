@@ -1,6 +1,11 @@
+@font-face {
+  font-family: "Glamor-Bold";
+  src: url("/fonts/Glamor-OTF/Glamor-Bold.otf") format("opentype");
+}
+
 body
 {
-    background-image: url("/img/background_texture_2.jpg");
+    background-image: url("/img/hair_salon_background_web.png");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -12,38 +17,51 @@ body
     position: relative;
 }
 
+a
+{
+    color: #561AB6;
+}
+
+label
+{
+    color: #131221;
+    font-size: 24px;
+}
+
 /*===NAVBAR AND HEADER STYLING============================================*/
 .page-header
 {
     /* Leave space for navbar */
-    margin-top: 100px;
+    margin-top: 200px;
     text-align: center;
     background-color: transparent;
 
     /* Make text more readable by outlining */
-    -webkit-text-stroke: 1px black;
-    color: #f5d5d5;
-    text-shadow:
-    2px 2px 0 #000,
-    -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-    1px 1px 0 #000;
+    /*-webkit-text-stroke: 1px #561AB6;*/
+    color: #131221;
+    /*text-shadow:
+    2px 2px 0 #A696B6,
+    -1px -1px 0 #A696B6,
+    1px -1px 0 #A696B6,
+    -1px 1px 0 #A696B6,
+    1px 1px 0 #A696B6;*/
 
     /* Create thin dark line for separation */
-    border-bottom: 1px solid #111;
+    border-bottom: 3px solid #131221;
 }
 
 /* Give header adaquate space from navbar */
 .page-header h1
 {
+    font-family: "Glamor-Bold", Fallback, sans-serif;
+    font-size: 5em;
     padding-top: 20px;
 }
 
 .nav-bar
 {
-    height: 75px;
-    background-image: url("/img/hair_blowing.jpg");
+    height: 175px;
+    background-image: url("/img/hair_salon_banner.png");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -56,41 +74,52 @@ body
 .navbar-inverse .navbar-brand
 {
     /* Outline brand for readability */
-    font-size: 1.5em;
-    -webkit-text-stroke: 1px white;
-    color: #f5d5d5;
-    text-shadow:
-    1px 1px 0 #fefefe,
-    -0.5px -0.5px 0 #fefefe,
-    0.5px -0.5px 0 #fefefe,
-    -0.5px 0.5px 0 #fefefe,
-    0,5px 0.5px 0 #fefefe;
+    font-family: "Glamor-Bold", Fallback, sans-serif;
+    /*-webkit-text-stroke: 1px black;*/
+    color: #E89965;
+    /*text-shadow:
+    1px 1px 0 #E89965,
+    -0.5px -0.5px 0 #E89965,
+    0.5px -0.5px 0 #E89965,
+    -0.5px 0.5px 0 #E89965,
+    0,5px 0.5px 0 #E89965;*/
 }
 
 .glyphicon-home
 {
     /* Outline home icon for readability */
-    -webkit-text-stroke: 1px white;
-    color: #f5d5d5;
+    /*-webkit-text-stroke: 1px white;*/
+    color: #E89965;
     text-shadow:
-    1px 1px 0 #fefefe,
-    -0.5px -0.5px 0 #fefefe,
-    0.5px -0.5px 0 #fefefe,
-    -0.5px 0.5px 0 #fefefe,
-    0,5px 0.5px 0 #fefefe;
+    1px 1px 0 #E89965,
+    -0.5px -0.5px 0 #E89965,
+    0.5px -0.5px 0 #E89965,
+    -0.5px 0.5px 0 #E89965,
+    0,5px 0.5px 0 #E89965;
 }
 
 #home-glyph-button
 {
     float: right;
-    font-size: 1.5em;
-    margin-top: 10px;
+    font-size: 2.5em;
 }
 
 #hamburger
 {
     /* Keep space between home icon and hamburger button */
     margin-left: 30px;
+    margin-top: 25px;
+}
+
+.navbar-inverse .navbar-toggle
+{
+    border-color: #E89965;
+}
+
+.navbar-inverse .navbar-toggle .icon-bar
+{
+    background-color: #E89965;
+    height: 4px;
 }
 
 /*===CHOOSE STYLIST DROPDOWN=====================================*/
@@ -100,6 +129,7 @@ body
 {
     /* Move away from left side */
     margin-left: 5px;
+    color: #561AB6;
 }
 
 .dropdown-button-text
@@ -107,12 +137,14 @@ body
     /* Allow for spacing between caret and text to remain consistent */
     float: left;
     margin-right: 10px;
+    color: #561AB6;
 }
 
 .dropdown-button-text p
 {
     /* Keep button thin 34px height */
     margin-bottom: 0;
+    color: #561AB6;
 }
 
 .caret
@@ -229,10 +261,18 @@ body
         float: none;
     }
 
+    .navbar-inverse .navbar-brand
+    {
+        margin-top: 65px;
+        font-size: 2.5em;
+    }
+
     #home-glyph-button
     {
         margin-right: 30px;
-        font-size: 2em;
+        margin-top: 50px;
+        font-size: 2.5em;
+        padding: 15px;
     }
 
     #all-stylists-display , #all-clients-display
@@ -251,5 +291,21 @@ body
     #stylist-dropdown
     {
         width: 100%;
+    }
+
+    .navbar-inverse
+    {
+        height: 75px;
+    }
+
+    .navbar-inverse .navbar-brand
+    {
+        font-size: 2.5em;
+        margin-top: 25px;
+    }
+
+    #home-glyph-button
+    {
+        margin-top: 25px;
     }
 }
