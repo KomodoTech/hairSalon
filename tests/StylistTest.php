@@ -465,43 +465,42 @@
         }
 
 
-        // function test_moveUnassignedStylistToBeginning()
-        // {
-        //     //ARRANGE
-        //     $stylist_name = "S_Satchel Charge";
-        //     $new_stylist = new Stylist($stylist_name);
-        //     $new_stylist->save();
-        //
-        //     $stylist_name2 = "S_Wormy Cereal";
-        //     $new_stylist2 = new Stylist($stylist_name2);
-        //     $new_stylist2->save();
-        //
-        //     $stylist_name3 = "UNASSIGNED";
-        //     $new_stylist3 = new Stylist($stylist_name3);
-        //     $new_stylist3->save();
-        //
-        //     $stylist_name4 = "S_Meager Genocide";
-        //     $new_stylist4 = new Stylist($stylist_name4);
-        //     $new_stylist4->save();
-        //
-        //     $stylist_name5 = "UNASSIGNED";
-        //     $new_stylist5 = new Stylist($stylist_name5);
-        //     $new_stylist5->save();
-        //
-        //     $stylist_name6 = "S_Wendnesday Latrine";
-        //     $new_stylist6 = new Stylist($stylist_name6);
-        //     $new_stylist6->save();
-        //
-        //     $stylists = [$new_stylist, $new_stylist2, $new_stylist3, $new_stylist4, $new_stylist5, $new_stylist6];
-        //
-        //     $expected_output = [$new_stylist3, $new_stylist, $new_stylist2, $new_stylist4, $new_stylist6];
-        //
-        //
-        //     //ACT
-        //     $result = Stylist::moveUnassignedStylistToBeginning($stylists);
-        //
-        //     //ASSERT
-        //     $this->assertEquals($expected_output, $result);
-        // }
+        function test_moveUnassignedStylistToBeginning()
+        {
+            //ARRANGE
+            $stylist_name = "S_Satchel Charge";
+            $new_stylist = new Stylist($stylist_name);
+            $new_stylist->save();
+
+            $stylist_name2 = "S_Wormy Cereal";
+            $new_stylist2 = new Stylist($stylist_name2);
+            $new_stylist2->save();
+
+            $stylist_name3 = "UNASSIGNED";
+            $new_stylist3 = new Stylist($stylist_name3);
+            $new_stylist3->save();
+
+            $stylist_name4 = "S_Meager Genocide";
+            $new_stylist4 = new Stylist($stylist_name4);
+            $new_stylist4->save();
+
+            $stylist_name5 = "UNASSIGNED";
+            $new_stylist5 = new Stylist($stylist_name5);
+            $new_stylist5->save();
+
+            $stylist_name6 = "S_Wendnesday Latrine";
+            $new_stylist6 = new Stylist($stylist_name6);
+            $new_stylist6->save();
+
+            $stylists = [$new_stylist, $new_stylist2, $new_stylist3, $new_stylist4, $new_stylist5, $new_stylist6];
+
+            $expected_output = [$new_stylist3, $new_stylist, $new_stylist2, $new_stylist4, $new_stylist6];
+
+            //ACT
+            $result = Stylist::moveUnassignedStylistToBeginning($stylists);
+
+            //ASSERT
+            $this->assertEquals($expected_output, $result);
+        }
     }
  ?>

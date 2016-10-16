@@ -105,7 +105,7 @@
                 {
                     $current_stylist = $stylists_data[$stylist_index];
                     $stylist_name = $current_stylist['name'];
-                    $stylist_id = $current_stylist['id'];
+                    $stylist_id = (int) $current_stylist['id'];
 
                     $stylist_object = new Stylist($stylist_name, $stylist_id);
                     $stylists[] = $stylist_object;
@@ -258,31 +258,27 @@
         // FOR REORDERING STYLISTS TO HAVE UNASSIGNED AT INDEX 0
         static function moveUnassignedStylistToBeginning($stylists)
         {
-            $unique_unassigned_stylist = self::makeUnassignedStylistUnique($stylists);
-            print("\nstylists unique unassigned:\n");
-            var_dump($stylists);
-            print("\n");
+            $stylists = self::makeUnassignedStylistUnique($stylists);
+
+            $unique_unassigned_stylist = Stylist::findByName("UNASSIGNED")[0];
 
             if ($unique_unassigned_stylist)
             {
-                // PUSH NEW EMPTY OBJ TO END OF ARRAY
-                $stylists[] = NULL;
+                // CREATE NEW TEMP ARRAY WITH UNASSIGNED AT THE BEGINNING
+                $stylists_temp = [$unique_unassigned_stylist];
+
                 // REORDER STYLISTS SO THAT UNASSIGNED IS ALWAYS FIRST
-                for ($stylist_index = count($stylists) - 2; $stylist_index >= 0; $stylist_index--)
+                for ($stylist_index = 0; $stylist_index < count($stylists); $stylist_index++)
                 {
-                    // IF UNASSIGNED STYLIST THEN DELETE AND MOVE ON
-                    if ($current_stylist === $unique_unassigned_stylist)
+                    $current_stylist = $stylists[$stylist_index];
+                    // IF UNASSIGNED STYLIST MOVE ON
+                    if ($current_stylist != $unique_unassigned_stylist)
                     {
-                        $current_stylist->delete();
-                    }
-                    else
-                    {
-                        $current_stylist = $stylists[$stylist_index];
-                        $stylists[$stylist_index + 1] = $current_stylist;
+                        $stylists_temp[] = $current_stylist;
                     }
                 }
-                // FINALLY REINSERT UNASSIGNED STYLIST AT INDEX 0
-                $stylists[0] = $unique_unassigned_stylist;
+
+                $stylists = $stylists_temp;
             }
             return $stylists;
         }

@@ -104,8 +104,8 @@
                 {
                     $current_client = $clients_data[$client_index];
                     $client_name = $current_client['name'];
-                    $client_stylist_id = $current_client['stylist_id'];
-                    $client_id = $current_client['id'];
+                    $client_stylist_id = (int) $current_client['stylist_id'];
+                    $client_id = (int) $current_client['id'];
 
                     $client_object = new Client($client_name, $client_stylist_id, $client_id);
 
