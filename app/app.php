@@ -33,8 +33,9 @@
     $app->get("/", function() use($app)
     {
         $home_name = "Chez Proot";
-        $display_stylists = Stylist::getAll();
 
+        //TODO: DRY OUT CODE. MAKE NEW FUNCTION TO COMBINE STEPS
+        $display_stylists = Stylist::getAll();
         // CHECK FOR UNASSIGNED STYLIST
         $display_stylists = Stylist::moveUnassignedStylistToBeginning($display_stylists);
 
@@ -85,7 +86,16 @@
 
                 // CHECK TO SEE IF CLIENT WAS LAST UNASSIGNED CLIENT
                 // IF SO THEN DELETE UNASSIGNED STYLIST
-                if ($client_to_delete->getStylistId)
+                $client_stylist_id = $client_to_delete->getStylistId();
+                $client_stylist = Stylist::findById($client_stylist_id);
+                $client_stylist_name = $client_stylist->getName();
+                if ($client_stylist_name === "UNASSIGNED")
+                {
+                    if (count($client_stylist->getClients()) == 1)
+                    {
+                        $client_stylist->delete();
+                    }
+                }
 
                 $client_to_delete->delete();
             }

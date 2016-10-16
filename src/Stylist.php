@@ -165,6 +165,10 @@
             return $found_stylists;
         }
 
+        /*TODO:
+         * REVISIT MERIT OF LAZY INSTANTIATE HERE. SEEMS TO MAKE LITTLE
+         * SENSE IN THIS CASE
+         */
         /*==LAZY INSTANTIATE UNASSIGNED STYLIST================*/
         static function getUnassignedStylist()
         {
