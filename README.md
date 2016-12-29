@@ -1,6 +1,6 @@
 # hairSalon
 
-#### A website that allows a hair salon to keep track of stylists and their clients. It will use php, silex, twig, mysql, and tests (phpunit). 10.07.16
+#### A website that allows a hair salon to keep track of stylists and their clients. It will use php, silex, twig, mysql, and tests (phpunit and symphony functional tests). 12.29.16
 
 #### By **Alexandre Leibler**
 
@@ -49,7 +49,7 @@ _If you wish to view the source code locally on your machine please follow the f
           http://localhost:8000/
 
   +  9). To run tests from the root project directory execute the following command in the terminal:
-          vendor/phpunit/phpunit/phpunit tests
+          vendor/phpunit/phpunit/phpunit
 
   +  10). If you wish to look at the source code, feel free to browse through the files in the hairSalon directory
 

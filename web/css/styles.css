@@ -5,27 +5,36 @@
 
 body
 {
-    background-image: url("/img/hair_salon_background_web.png");
+    background-image: url("/img/background_texture_2.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 #main-content
 {
-    /* Allow for client and stylist details to float above the main-content using
-     position: absolute relative to main content*/
+    /* Allow for client and stylist details to float above the main-content using position: absolute relative to main content*/
     position: relative;
 }
 
 a
 {
-    color: #561AB6;
+    color: #E89965;
 }
 
 label
 {
-    color: #131221;
+    color: #FCEFCB;
     font-size: 24px;
+}
+
+.btn-success
+{
+    background-color: #72CC6C;
+}
+
+.btn-danger
+{
+    background-color: #FF4837;
 }
 
 /*===NAVBAR AND HEADER STYLING============================================*/
@@ -35,17 +44,7 @@ label
     margin-top: 200px;
     text-align: center;
     background-color: transparent;
-
-    /* Make text more readable by outlining */
-    /*-webkit-text-stroke: 1px #561AB6;*/
     color: #131221;
-    /*text-shadow:
-    2px 2px 0 #A696B6,
-    -1px -1px 0 #A696B6,
-    1px -1px 0 #A696B6,
-    -1px 1px 0 #A696B6,
-    1px 1px 0 #A696B6;*/
-
     /* Create thin dark line for separation */
     border-bottom: 3px solid #131221;
 }
@@ -54,14 +53,23 @@ label
 .page-header h1
 {
     font-family: "Glamor-Bold", Fallback, sans-serif;
-    font-size: 5em;
+    font-size: 2.5em;
     padding-top: 20px;
+    color: #FCEFCB;
+    /* Add shadow for readability */
+    text-shadow:
+    1px 1px 0 #E89965,
+    -0.5px -0.5px 0 #E89965,
+    0.5px -0.5px 0 #E89965,
+    -0.5px 0.5px 0 #E89965,
+    0,5px 0.5px 0 #E89965;
+
 }
 
 .nav-bar
 {
     height: 175px;
-    background-image: url("/img/hair_salon_banner.png");
+    background-color: #FCEFCB;
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -73,16 +81,8 @@ label
 
 .navbar-inverse .navbar-brand
 {
-    /* Outline brand for readability */
     font-family: "Glamor-Bold", Fallback, sans-serif;
-    /*-webkit-text-stroke: 1px black;*/
     color: #E89965;
-    /*text-shadow:
-    1px 1px 0 #E89965,
-    -0.5px -0.5px 0 #E89965,
-    0.5px -0.5px 0 #E89965,
-    -0.5px 0.5px 0 #E89965,
-    0,5px 0.5px 0 #E89965;*/
 }
 
 .glyphicon-home
@@ -129,7 +129,7 @@ label
 {
     /* Move away from left side */
     margin-left: 5px;
-    color: #561AB6;
+    color: #E89965;
 }
 
 .dropdown-button-text
@@ -137,14 +137,14 @@ label
     /* Allow for spacing between caret and text to remain consistent */
     float: left;
     margin-right: 10px;
-    color: #561AB6;
+    color: #E89965;
 }
 
 .dropdown-button-text p
 {
     /* Keep button thin 34px height */
     margin-bottom: 0;
-    color: #561AB6;
+    color: #E89965;
 }
 
 .caret
@@ -178,6 +178,18 @@ label
 {
     /* In order to move delete-all button to the bottom of the div */
     position: relative;
+    background-color: #FCEFCB;
+
+}
+
+#all-stylists-display h4
+{
+    color: #241810;
+}
+
+#all-clients-display h4
+{
+    color: #241810;
 }
 
 /*================SEARCH BAR==================================================*/
@@ -307,5 +319,15 @@ label
     #home-glyph-button
     {
         margin-top: 25px;
+    }
+
+    #all-stylists-display li , #all-clients-display li
+    {
+        font-size: 1.5em;
+    }
+
+    #all-stylists-display h4 , #all-clients-display h4
+    {
+        font-size: 2.0em;
     }
 }
