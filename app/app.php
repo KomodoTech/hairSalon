@@ -69,7 +69,8 @@
 
                 $display_stylists = Stylist::getAll();
                 // CHECK FOR UNASSIGNED STYLIST
-                $display_stylists = Stylist::moveUnassignedStylistToBeginning($display_stylists);
+                // TODO: MAKE A DELETE ALL STYLISTS AND DELETE ALL CLIENTS BUTTON
+                // $display_stylists = Stylist::moveUnassignedStylistToBeginning($display_stylists);
                 $display_clients = Client::getAll();
 
                 $_POST["delete_all"] = 0;
@@ -117,6 +118,7 @@
                 $stylist_to_delete = Stylist::findById($delete_stylist_id);
                 $stylist_clients = $stylist_to_delete->getClients();
 
+                Stylist::makeNewUnassignedStylist();
                 $unassigned_stylist = Stylist::getUnassignedStylist();
 
                 $unassigned_stylist_id = $unassigned_stylist->getId();

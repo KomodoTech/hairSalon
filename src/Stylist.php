@@ -165,11 +165,7 @@
             return $found_stylists;
         }
 
-        /*TODO:
-         * REVISIT MERIT OF LAZY INSTANTIATE HERE. SEEMS TO MAKE LITTLE
-         * SENSE IN THIS CASE
-         */
-        /*==LAZY INSTANTIATE UNASSIGNED STYLIST================*/
+
         static function getUnassignedStylist()
         {
             $unassigned = Stylist::findByName("UNASSIGNED");
@@ -179,22 +175,14 @@
                 $unassigned_stylist = $unassigned[0];
                 return $unassigned_stylist;
             }
-            else
-            {
-                $sql_command = "INSERT INTO stylists (name) VALUES ('UNASSIGNED');";
-
-                $GLOBALS['DB']->exec($sql_command);
-
-                //NOTE: figure out why recursion returned twice
-                $unassigned = Stylist::findByName("UNASSIGNED");
-
-                if ($unassigned)
-                {
-                    $unassigned_stylist = $unassigned[0];
-                    return $unassigned_stylist;
-                }
-            }
             return NULL;
+        }
+
+        static function makeNewUnassignedStylist()
+        {
+            $sql_command = "INSERT INTO stylists (name) VALUES ('UNASSIGNED');";
+
+            $GLOBALS['DB']->exec($sql_command);
         }
 
         /*NOTE:
@@ -264,7 +252,7 @@
         {
             $stylists = self::makeUnassignedStylistUnique($stylists);
 
-            $unique_unassigned_stylist = Stylist::findByName("UNASSIGNED")[0];
+            $unique_unassigned_stylist = Stylist::getUnassignedStylist();
 
             if ($unique_unassigned_stylist)
             {
@@ -285,6 +273,18 @@
                 $stylists = $stylists_temp;
             }
             return $stylists;
+        }
+
+
+        static function removeUnassignedStylistIfEmpty()
+        {
+            $unassigned_stylist = Stylist::getUnassignedStylist();
+            $unassigned_clients = $unassigned_stylist->getClients();
+
+            if (empty($unassigned_clients))
+            {
+                $unassigned_stylist->delete();
+            }
         }
     }
  ?>

@@ -73,13 +73,22 @@
             $this->setName($new_name);
         }
 
-
         function updateStylistId($new_stylist_id)
         {
             $id = $this->getId();
 
             $sql_command = "UPDATE clients SET stylist_id = '" . $new_stylist_id . "' WHERE id = " . $id . ";";
             $GLOBALS['DB']->exec($sql_command);
+
+            // If StylistId was UNASSIGNED stylist and this client was the last unassigned one, then remove UNASSIGNED stylist
+            $unassigned = Stylist::findByName("UNASSIGNED");
+            if ($unassigned)
+            {
+                if ($unassigned[0]->getId() == $this->getStylistId())
+                {
+                    Stylist::removeUnassignedStylistIfEmpty();
+                }
+            }
 
             $this->setStylistId($new_stylist_id);
         }
