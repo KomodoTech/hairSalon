@@ -21,20 +21,20 @@ _If you wish to view the source code locally on your machine please follow the f
 
   +  3). Navigate to the hairSalon directory, and execute the following command in the terminal:
           composer install
-  
+
   +  4). To replicate the production database used by this app use your preferred server stack (e.g. MAMP, LAMP, etc.) to   
-         launch a mysql server (using port localhost:8889, username:root, password:root, or changing the database 
+         launch a mysql server (using port localhost:8889, username:root, password:root, or changing the database
          configuration in the php files to match your setup).
-  
+
   +  5). Once you have your mysql server properly setup, run the following commands in your mysql shell:
-         
+
             CREATE DATABASE hair_salon;
             CREATE DATABASE hair_salon_test;
-  
-  +  6). To replicate the settings used for these databases either navigate to the local phpMyAdmin page and import the 
-         _localhost.sql.zip_ file which resides inside the databases directory, or execute the following commands in your 
+
+  +  6). To replicate the settings used for these databases either navigate to the local phpMyAdmin page and import the
+         _localhost.sql.zip_ file which resides inside the databases directory, or execute the following commands in your
          mysql shell:
-         
+
            USE hair_salon_test;
            CREATE TABLE stylists (id serial PRIMARY KEY, name VARCHAR (255));
            CREATE TABLE clients (id serial PRIMARY KEY, name VARCHAR (255), stylist_id INT);
@@ -48,34 +48,37 @@ _If you wish to view the source code locally on your machine please follow the f
   +  8). Open up the browser of your choice and go to the following url:
           http://localhost:8000/
 
-  +  9). If you wish to look at the source code, feel free to browse through the files in the hairSalon directory
+  +  9). To run tests from the root project directory execute the following command in the terminal:
+          vendor/phpunit/phpunit/phpunit tests
+
+  +  10). If you wish to look at the source code, feel free to browse through the files in the hairSalon directory
 
 
 ## Specs
 
 * 1). View Stylists/Clients
   + IN:  
-  + OUT: 
+  + OUT:
 
 * 2). Add Stylist
   + IN:  
-  + OUT: 
+  + OUT:
 
 * 3). Add Client To Stylist
   + IN:  
-  + OUT: 
+  + OUT:
 
 * 4). View Client/Stylist Details
   + IN:  
-  + OUT: 
+  + OUT:
 
 * 5). Edit Client/Stylist Name
   + IN:  
-  + OUT: 
+  + OUT:
 
 * 6). Edit Client Stylist
-  + IN: 
-  + OUT: 
+  + IN:
+  + OUT:
 
 * 7). Delete All Clients and Stylists
   + IN:
@@ -84,11 +87,11 @@ _If you wish to view the source code locally on your machine please follow the f
 * 8). Delete Specified Client/Stylist
   + IN:
   + OUT:
-  
+
 * 9). Search Client/Stylist by Id
   + IN:
   + OUT:
- 
+
 * 10). Search Client/Stylist by Name
   + IN:
   + OUT:

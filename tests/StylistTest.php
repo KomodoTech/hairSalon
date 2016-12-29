@@ -95,6 +95,8 @@
             //ACT
             $new_stylist->delete();
             $all_stylists = Stylist::getAll();
+            /* To avoid undefined offset error, add null element to end of $all_stylists */
+            $all_stylists[] = null;
             $result = $all_stylists[0];
 
             //ASSERT
