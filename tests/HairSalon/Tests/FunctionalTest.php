@@ -1,8 +1,20 @@
 <?php
+    /**
+    *@backupGlobals disabled
+    *@backupStaticAttributes disabled
+    */
     namespace HairSalon\Tests;
 
     //NOTE: found in vendor/silex/src
     use Silex\WebTestCase;
+
+    require_once("src/Stylist.php");
+    require_once("src/Client.php");
+
+    $server = "mysql:host=localhost:8889;dbname=hair_salon_test";
+    $username = "root";
+    $password = "root";
+    $DB = new PDO($server, $username, $password);
 
     class FunctionalTest extends WebTestCase
     {
@@ -15,8 +27,9 @@
             return $app;
         }
 
+/*===========================TEST FRONT PAGE==================================*/
 
-        public function testInitialPage()
+        public function testFrontPageNoData()
         {
             $client = $this->createClient();
             $crawler = $client->request('GET', '/');
