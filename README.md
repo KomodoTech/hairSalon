@@ -17,7 +17,7 @@ Each stylist can have many clients, but a client can only have one stylist at a 
 #### NOTE: ASSUME DATABASE STARTS EMPTY
 
 | _Behavior_ | _Input_ | _Output_ |
-|:---------------------------------------------------------------------:|:---------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------:|
+|:----------------------------------------------------------------------------:|:---------------------------------------------------------------------------:|:--------------------------------------------------------------------------------:|
 | View front page (no data) | None | Display Message No Clients/Stylists Found, Display option to add stylist |
 | Add stylist | stylist_name (string) -> click create stylist button | Display Message No Clients Found + Display stylist_name under Stylists section + Display option to add stylist + Display option to add client with stylist selection dropdown + Display Delete All button |
 
@@ -46,9 +46,9 @@ If you wish to view the site locally on your machine please follow the following
     `CREATE DATABASE hair_salon;`
     `CREATE DATABASE hair_salon_test;`
 
-#####  6). To replicate the settings used for these databases either navigate to the local phpMyAdmin page and import the _hair*_salon.sql.zip_ file which resides inside the databases directory, or execute the following commands in your mysql shell:
+#####  6). To replicate the settings used for these databases either navigate to the local phpMyAdmin page and import the _hair_salon.sql.zip_ file which resides inside the databases directory, or execute the following commands in your mysql shell:
 
-    ` USE hair_salon_test;
+    `USE hair_salon_test;
     CREATE TABLE stylists (id serial PRIMARY KEY, name VARCHAR (255));
     CREATE TABLE clients (id serial PRIMARY KEY, name VARCHAR (255), stylist_id INT);
     USE hair_salon;
@@ -57,7 +57,7 @@ If you wish to view the site locally on your machine please follow the following
 
 #####  7). Navigate to the web directory and start your local host by executing the following command in your terminal:
 
-    ` php -S localhost:8000`
+    `php -S localhost:8000`
 
 #####  8). Open up the browser of your choice and go to the following url:
 
@@ -65,7 +65,7 @@ If you wish to view the site locally on your machine please follow the following
 
 #####  9). To run tests from the root project directory execute the following command in the terminal:
 
-    ` vendor/phpunit/phpunit/phpunit`
+    `vendor/phpunit/phpunit/phpunit`
 
 #####  10). If you wish to look at the source code, feel free to browse through the files in the hairSalon directory
 
@@ -93,55 +93,5 @@ For comments or questions, please email alexandre.leibler@gmail.com
 ### **License**
 
 GPL-3.0
-
-
-
-
-
-
-## Specs
-
-### Functional Testing:
-
-* 1). View Stylists/Clients
-  + IN:  
-  + OUT:
-
-* 2). Add Stylist
-  + IN:  
-  + OUT:
-
-* 3). Add Client To Stylist
-  + IN:  
-  + OUT:
-
-* 4). View Client/Stylist Details
-  + IN:  
-  + OUT:
-
-* 5). Edit Client/Stylist Name
-  + IN:  
-  + OUT:
-
-* 6). Edit Client Stylist
-  + IN:
-  + OUT:
-
-* 7). Delete All Clients and Stylists
-  + IN:
-  + OUT:
-
-* 8). Delete Specified Client/Stylist
-  + IN:
-  + OUT:
-
-* 9). Search Client/Stylist by Id
-  + IN:
-  + OUT:
-
-* 10). Search Client/Stylist by Name
-  + IN:
-  + OUT:
-
 
 hairSalon Copyright (c) 2016 **Alexandre Leibler**
