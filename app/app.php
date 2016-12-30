@@ -32,7 +32,7 @@
 
     $app->get("/", function() use($app)
     {
-        $home_name = "Chez Proot";
+        $home_name = "Chez Root";
 
         //TODO: DRY OUT CODE. MAKE NEW FUNCTION TO COMBINE STEPS
         $display_stylists = Stylist::getAll();

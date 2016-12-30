@@ -18,9 +18,7 @@ Each stylist can have many clients, but a client can only have one stylist at a 
 
 | _Behavior_ | _Input_ | _Output_ |
 |:---------------------------------------------------------------------:|:---------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------:|
-
 | View front page (no data) | None | Display Message No Clients/Stylists Found, Display option to add stylist |
-
 | Add stylist | stylist_name (string) -> click create stylist button | Display Message No Clients Found + Display stylist_name under Stylists section + Display option to add stylist + Display option to add client with stylist selection dropdown + Display Delete All button |
 
 ----
