@@ -1,4 +1,4 @@
-# **Hair Salon**
+# **Hair Salon** :haircut:
 
 ##### A website that allows a hair salon to keep track of stylists and their clients. It uses php, silex, twig, mysql, phpunit, and symphony functional tests). 12/2016
 #
@@ -11,7 +11,7 @@
 </br>
 
 ---
-### **Description**
+### **Description** :bulb:
 
 > Each stylist can have many clients, but a client can only have one stylist at a time (one-to-many). The backend code is fairly straightforward but has a few nifty methods for finding stylists and clients by id or name. The controller (app.php) code takes care of routing and experiments with keeping the number of routes small by passing values to the view files (through twig) which display differently depending on what options are passed in. The frontend also uses partials to avoid repetition of code.
 
@@ -19,7 +19,7 @@
 </br>
 
 ---
-### **Specifications**
+### **Specifications** :memo:
 
 #### NOTE: ASSUME DATABASE STARTS EMPTY
 
@@ -67,7 +67,7 @@
 </br>
 
 ---
-### **Setup/Installation Requirements ( * Nix)**
+### **Setup/Installation Requirements ( * Nix)** :checkered_flag:
 
 _If you wish to view the site locally on your machine please follow the following steps:_
 
@@ -150,7 +150,7 @@ vendor/phpunit/phpunit/phpunit
 </br>
 
 ---
-### **Todo**
+### **Todo** :construction:
 - [ ] Implement full substring search
 - [ ] Write functional tests
 - [x] Update README.md
@@ -167,7 +167,7 @@ None
 For comments or questions, please email alexandre.leibler@gmail.com
 
 ---
-### **Technologies Used**
+### **Technologies Used** :nut_and_bolt:
 
 * silex v~2.0
 * twig v~1.0
@@ -176,7 +176,7 @@ For comments or questions, please email alexandre.leibler@gmail.com
 * symphony v3.2
 
 ---
-### **License**
+### **License** :hammer:
 
 GPL-3.0
 
