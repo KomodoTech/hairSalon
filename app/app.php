@@ -56,7 +56,7 @@
 
     $app->post("/", function() use($app)
     {
-        $home_name = "Chez Proot";
+        $home_name = "Chez Root";
 
         /*===========DELETE ALL===============================================*/
         if (isset($_POST["delete_all"]))
@@ -195,7 +195,7 @@
 
     /*=========VIEW CLIENT DETAILS============================================*/
     $app->get("/client/{client_id}", function($client_id) use($app) {
-        $home_name = "Chez Proot";
+        $home_name = "Chez Root";
         $display_clients = Client::getAll();
         $display_stylists = Stylist::getAll();
         // CHECK FOR UNASSIGNED STYLIST
@@ -218,7 +218,7 @@
 
     /*=========VIEW CLIENT AFTER EDITING======================================*/
     $app->post("/client/{client_id}", function($client_id) use($app) {
-        $home_name = "Chez Proot";
+        $home_name = "Chez Root";
         $client = Client::findById($client_id);
 
         // CHECK IF USER PRESSED UPDATE BUTTON
@@ -279,7 +279,7 @@
 
     /*=========VIEW STYLIST===================================================*/
     $app->get("/stylist/{stylist_id}", function($stylist_id) use($app) {
-        $home_name = "Chez Proot";
+        $home_name = "Chez Root";
         $display_clients = Client::getAll();
         $display_stylists = Stylist::getAll();
         // CHECK FOR UNASSIGNED STYLIST
@@ -300,7 +300,7 @@
 
     /*=========VIEW STYLIST AFTER EDITING=====================================*/
     $app->post("/stylist/{stylist_id}", function($stylist_id) use($app) {
-        $home_name = "Chez Proot";
+        $home_name = "Chez Root";
         $stylist = Stylist::findById($stylist_id);
 
         // CHECK IF USER PRESSED UPDATE BUTTON
@@ -346,7 +346,7 @@
 
     /*=========VIEW SEARCH RESULTS============================================*/
     $app->get("/search_results" , function() use($app) {
-        $home_name = "Chez Proot";
+        $home_name = "Chez Root";
 
         /*
         NOTE: this route should only be reached when $_GET["search_term"] exists

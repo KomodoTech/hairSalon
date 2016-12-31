@@ -255,9 +255,36 @@ label
     margin-left: 99%;
 }
 
+#new-stylist-name-input label
+{
+    color: #131221;
+    font-size: 12px;
+}
+
 #update-stylist-name-input
 {
     margin-bottom: 10px;
+}
+
+#update-stylist-name-button
+{
+    background-color: #72CC6C;
+}
+
+#new-client-name-input label
+{
+    color: #131221;
+    font-size: 12px;
+}
+
+#update-client-name-input
+{
+    margin-bottom: 10px;
+}
+
+#update-client-name-button
+{
+    background-color: #72CC6C;
 }
 
 /*===MEDIA QUERIES===========================================================*/

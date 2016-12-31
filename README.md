@@ -16,14 +16,20 @@
 
 #### NOTE: ASSUME DATABASE STARTS EMPTY
 
-| _Behavior_ | _Input_ | _Output_ |
-|------------|---------|----------|
-|            |         |          |
-| View front page (no data) | None | Display Message No Clients/Stylists Found, Display option to add stylist |
-|            |         |          |
-| Add stylist | stylist_name (string) -> click create stylist button | Display Message No Clients Found + Display stylist_name under Stylists section + Display option to add stylist + Display option to add client with stylist selection dropdown + Display Delete All button |
-|            |         |          |
-
+| _Behavior_                 | _Input_               | _Output_                 |
+| :------------------------- | :-------------------- | :----------------------- |
+|                            |                       |                          |
+| **View front page (no data)** | None | <ul><li> Display Message No Clients/Stylists Found </li><li>Display option to add stylist</li></ul> |
+|                            |                       |                          |
+| **Add stylist** | <ol><li>Enter stylist_name</li><li>Click create stylist button</li></ol> | <ul><li>Display Message No Clients Found</li><li>Display stylist_name under Stylists section</li><li>Display option to add stylist</li><li>Display option to add client with stylist selection dropdown</li><li>Display Delete All button</li></ul> |
+|                            |                       |                          |
+| **Add client** | <ol><li>Enter client_name</li><li>Select stylist_name from dropdown menu</li><li>Click create client button</li></ol> | <ul><li>Display client_name under Clients section</li><li>Display stylist_name under Stylists section</li><li>Display option to add stylist</li><li>Display option to add client with stylist selection dropdown</li><li>Display Delete All button</li></ul> |
+|                            |                       |                          |
+| **View stylist details** | <ol><li>Click on stylist_name link</li></ol> | <ul><li>Display stylist_name</li><li>Display all clients belonging to stylist_name as links</li><li>Display option to delete stylist</li><li>Display option to update stylist</li></ul> |
+|                            |                       |                          |
+| **View client details** | <ol><li>Click on client_name link</li></ol> | <ul><li>Display client_name</li><li>Display client_name's unique stylist as link</li><li>Display option to delete client</li><li>Display option to update client</li></ul> |
+|                            |                       |                          |
+| **View client details** | <ol><li>Click on client_name link</li></ol> | <ul><li>Display client_name</li><li>Display client_name's unique stylist as link</li><li>Display option to delete client</li><li>Display option to update client</li></ul> |
 #
 #
 #
@@ -103,8 +109,8 @@ vendor/phpunit/phpunit/phpunit
 #
 
 ---
-### **Known Bugs**
-None
+### **Known Bugs** :bug:
+None :smile_cat:
 
 ---
 ### **Support and contact details** :email:
