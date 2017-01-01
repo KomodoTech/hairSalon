@@ -21,9 +21,17 @@
     $DB = new PDO($server, $username, $password);
 
     $app = new Silex\Application();
-    $app->register(new Silex\Provider\TwigServiceProvider(), array("twig.path" => __DIR__ . "/../views"));
 
-    //TODO: Ask diane about twig namespace, modifying the loader etc.
+    //SETUP TWIG
+    $app->register(new Silex\Provider\TwigServiceProvider(),
+            array("twig.path" => __DIR__ . "/../views",
+            "twig.options" => array(
+                'strict_variables' => false,
+            )
+        )
+    );
+
+    //TODO: Look into namespace, modifying the loader etc.
 
     /*=ROUTES=================================================================*/
 
@@ -41,12 +49,13 @@
 
         $display_clients = Client::getAll();
 
+        // NOTE: If using standard loader, add NULL values for all variables checked by twig so that functional tests don't fail when a variable does not exist
         return $app["twig"]->render("home.html.twig",
             array(
                 "display_clients" => $display_clients,
                 "display_stylists" => $display_stylists,
                 "all_stylists" => $display_stylists,
-                "home_name" => $home_name
+                "home_name" => $home_name,
             )
         );
     });
