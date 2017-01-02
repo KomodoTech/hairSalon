@@ -29,12 +29,12 @@ label
 
 .btn-success
 {
-    background-color: #72CC6C;
+    background-color: #72AA6C;
 }
 
 .btn-danger
 {
-    background-color: #FF4837;
+    background-color: #AA4837;
 }
 
 /*===NAVBAR AND HEADER STYLING============================================*/
@@ -46,7 +46,7 @@ label
     background-color: transparent;
     color: #131221;
     /* Create thin dark line for separation */
-    border-bottom: 3px solid #131221;
+    border-bottom: 3px solid #838281;
 }
 
 /* Give header adaquate space from navbar */
@@ -174,11 +174,17 @@ label
 
 /*===CLIENTS STYLISTS LIST====================================================*/
 
+#search-bar
+{
+    margin-left: 18px;
+}
+
 #database-contents-list
 {
     /* In order to move delete-all button to the bottom of the div */
     position: relative;
     background-color: #FCEFCB;
+    padding-left: 2%;
 
 }
 
@@ -268,7 +274,7 @@ label
 
 #update-stylist-name-button
 {
-    background-color: #72CC6C;
+    background-color: #72AA6C;
 }
 
 #new-client-name-input label
@@ -284,7 +290,7 @@ label
 
 #update-client-name-button
 {
-    background-color: #72CC6C;
+    background-color: #72AA6C;
 }
 
 /*===MEDIA QUERIES===========================================================*/
