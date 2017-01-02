@@ -14,6 +14,7 @@
 
 
     /*=GLOBAL VARIABLES=======================================================*/
+    $home_name = "Chez Root";
 
     $server = "mysql:host=localhost:8889;dbname=hair_salon";
     $username = "root";
@@ -31,8 +32,6 @@
         )
     );
 
-    //TODO: Look into namespace, modifying the loader etc.
-
     /*=ROUTES=================================================================*/
 
     /*=HOME===================================================================*/
@@ -40,8 +39,6 @@
 
     $app->get("/", function() use($app)
     {
-        $home_name = "Chez Root";
-
         //TODO: DRY OUT CODE. MAKE NEW FUNCTION TO COMBINE STEPS
         $display_stylists = Stylist::getAll();
         // CHECK FOR UNASSIGNED STYLIST
@@ -55,7 +52,7 @@
                 "display_clients" => $display_clients,
                 "display_stylists" => $display_stylists,
                 "all_stylists" => $display_stylists,
-                "home_name" => $home_name,
+                "home_name" => $GLOBALS['home_name'],
             )
         );
     });
@@ -65,7 +62,6 @@
 
     $app->post("/", function() use($app)
     {
-        $home_name = "Chez Root";
 
         /*===========DELETE ALL===============================================*/
         if (isset($_POST["delete_all"]))
@@ -197,14 +193,13 @@
                 "display_clients" => $display_clients,
                 "display_stylists" => $display_stylists,
                 "all_stylists" => $display_stylists,
-                "home_name" => $home_name
+                "home_name" => $GLOBALS['home_name'],
             )
         );
     });
 
     /*=========VIEW CLIENT DETAILS============================================*/
     $app->get("/client/{client_id}", function($client_id) use($app) {
-        $home_name = "Chez Root";
         $display_clients = Client::getAll();
         $display_stylists = Stylist::getAll();
         // CHECK FOR UNASSIGNED STYLIST
@@ -217,17 +212,16 @@
                 "display_clients" => $display_clients,
                 "display_stylists" => $display_stylists,
                 "all_stylists" => $display_stylists,
-                "home_name" => $home_name,
+                "home_name" => $GLOBALS['home_name'],
                 "client" => $client,
                 "client_stylist" => $client_stylist,
-                "show_details" => 1
+                "show_details" => 1,
             )
         );
     });
 
     /*=========VIEW CLIENT AFTER EDITING======================================*/
     $app->post("/client/{client_id}", function($client_id) use($app) {
-        $home_name = "Chez Root";
         $client = Client::findById($client_id);
 
         // CHECK IF USER PRESSED UPDATE BUTTON
@@ -277,7 +271,7 @@
                 "display_clients" => $display_clients,
                 "display_stylists" => $display_stylists,
                 "all_stylists" => $display_stylists,
-                "home_name" => $home_name,
+                "home_name" => $GLOBALS['home_name'],
                 "client" => $client,
                 "client_stylist" => $client_stylist,
                 "show_details" => 1,
@@ -288,7 +282,6 @@
 
     /*=========VIEW STYLIST===================================================*/
     $app->get("/stylist/{stylist_id}", function($stylist_id) use($app) {
-        $home_name = "Chez Root";
         $display_clients = Client::getAll();
         $display_stylists = Stylist::getAll();
         // CHECK FOR UNASSIGNED STYLIST
@@ -300,7 +293,7 @@
                 "display_clients" => $display_clients,
                 "display_stylists" => $display_stylists,
                 "all_stylists" => $display_stylists,
-                "home_name" => $home_name,
+                "home_name" => $GLOBALS['home_name'],
                 "stylist" => $stylist,
                 "show_details" => 1
             )
@@ -309,7 +302,6 @@
 
     /*=========VIEW STYLIST AFTER EDITING=====================================*/
     $app->post("/stylist/{stylist_id}", function($stylist_id) use($app) {
-        $home_name = "Chez Root";
         $stylist = Stylist::findById($stylist_id);
 
         // CHECK IF USER PRESSED UPDATE BUTTON
@@ -344,7 +336,7 @@
                 "display_clients" => $display_clients,
                 "display_stylists" => $display_stylists,
                 "all_stylists" => $display_stylists,
-                "home_name" => $home_name,
+                "home_name" => $GLOBALS['home_name'],
                 "stylist" => $stylist,
                 "show_details" => 1,
                 "show_update_options" => $show_update_options
@@ -355,7 +347,6 @@
 
     /*=========VIEW SEARCH RESULTS============================================*/
     $app->get("/search_results" , function() use($app) {
-        $home_name = "Chez Root";
 
         /*
         NOTE: this route should only be reached when $_GET["search_term"] exists
@@ -389,7 +380,7 @@
 
         return $app["twig"]->render("home.html.twig",
             array(
-                "home_name" => $home_name,
+                "home_name" => $GLOBALS['home_name'],
                 "display_clients" => $found_clients,
                 "display_stylists" => $found_stylists,
                 "all_stylists" => $all_stylists,

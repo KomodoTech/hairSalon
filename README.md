@@ -1,6 +1,6 @@
 # **Hair Salon** :haircut:
 
-##### A website that allows a hair salon to keep track of stylists and their clients. It uses php, silex, twig, mysql, phpunit, and symphony functional tests). 12/2016
+##### A website that allows a hair salon to keep track of stylists and their clients. It uses php, silex, twig, mysql, phpunit, and symfony functional tests). 12/2016
 #
 ##### By [Alexandre Leibler](https://github.com/KomodoTech) :dragon_face:
 
