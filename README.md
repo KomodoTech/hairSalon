@@ -6,7 +6,7 @@
 
 </br>
 
-![screenshot of project main page](demo-screenshot.tiff)
+![screenshot of project main page](demo-screenshot.jpg)
 
 </br>
 
